@@ -4,6 +4,7 @@
     "description": "",
     "keywords": [],
     "active": 1,
+    "version": "0.1.0",
     "order": 1,
     "providers": [
         "Modules\\Ilocations\\Providers\\IlocationsServiceProvider",
