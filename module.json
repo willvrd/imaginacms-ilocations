@@ -1,0 +1,17 @@
+{
+    "name": "Ilocations",
+    "alias": "ilocations",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Ilocations\\Providers\\IlocationsServiceProvider",
+        "Modules\\Ilocations\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        
+    ],
+    "requires": []
+}

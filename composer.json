@@ -1,0 +1,54 @@
+{
+    "name": "imagina/ilocations",
+    "description": "",
+    "type": "asgard-module",
+    "license": "MIT", 
+    "require": {
+        "php": ">=7.0.0",
+        "composer/installers": "~1.0",
+        "idavoll/core-module": "~3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "orchestra/testbench": "3.5.*"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Ilocations\\": ".",
+            "Modules\\": "Modules/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Imagina Dev",
+            "email": "soporte@imaginacolombia.com"
+        }
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan module:migrate Ilocations --seed"
+        ],
+        "pre-update-cmd": [],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Ilocations\\Providers\\IlocationsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Ilocations\\": ""
+        }
+    }
+}
