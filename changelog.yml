@@ -1,0 +1,10 @@
+url: https://github.com/imagina/asgardcms-ilocations
+versions:
+    "0.1.1":
+        added:
+            - Geozones Entities Controller and views.
+        changed:
+            - Sidebar and ServiceProvider Class
+    "0.1.0":
+        added:
+          Initial Module

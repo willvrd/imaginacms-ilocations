@@ -80,8 +80,31 @@ class IlocationsServiceProvider extends ServiceProvider
                 return new \Modules\Ilocations\Repositories\Cache\CacheProvinceDecorator($repository);
             }
         );
-// add bindings
+        $this->app->bind(
+            'Modules\Ilocations\Repositories\GeozonesRepository',
+            function () {
+                $repository = new \Modules\Ilocations\Repositories\Eloquent\EloquentGeozonesRepository(new \Modules\Ilocations\Entities\Geozones());
 
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Ilocations\Repositories\Cache\CacheGeozonesDecorator($repository);
+            }
+        );
+        // $this->app->bind(
+        //     'Modules\Ilocations\Repositories\GeozonesCountriesRepository',
+        //     function () {
+        //         $repository = new \Modules\Ilocations\Repositories\Eloquent\EloquentGeozonesCountriesRepository(new \Modules\Ilocations\Entities\GeozonesCountries());
+        //
+        //         if (! config('app.cache')) {
+        //             return $repository;
+        //         }
+        //
+        //         return new \Modules\Ilocations\Repositories\Cache\CacheGeozonesCountriesDecorator($repository);
+        //     }
+        // );
+// add bindings
 
     }
 }

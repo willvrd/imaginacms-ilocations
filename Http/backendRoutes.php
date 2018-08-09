@@ -70,6 +70,39 @@ $router->group(['prefix' =>'/ilocations'], function (Router $router) {
         'uses' => 'ProvinceController@destroy',
         'middleware' => 'can:ilocations.provinces.destroy'
     ]);
+    $router->bind('geozones', function ($id) {
+        return app('Modules\Ilocations\Repositories\GeozonesRepository')->find($id);
+    });
+    $router->get('geozones', [
+        'as' => 'admin.ilocations.geozones.index',
+        'uses' => 'GeozonesController@index',
+        'middleware' => 'can:ilocations.geozones.index'
+    ]);
+    $router->get('geozones/create', [
+        'as' => 'admin.ilocations.geozones.create',
+        'uses' => 'GeozonesController@create',
+        'middleware' => 'can:ilocations.geozones.create'
+    ]);
+    $router->post('geozones', [
+        'as' => 'admin.ilocations.geozones.store',
+        'uses' => 'GeozonesController@store',
+        'middleware' => 'can:ilocations.geozones.create'
+    ]);
+    $router->get('geozones/{geozones}/edit', [
+        'as' => 'admin.ilocations.geozones.edit',
+        'uses' => 'GeozonesController@edit',
+        'middleware' => 'can:ilocations.geozones.edit'
+    ]);
+    $router->put('geozones/{geozones}', [
+        'as' => 'admin.ilocations.geozones.update',
+        'uses' => 'GeozonesController@update',
+        'middleware' => 'can:ilocations.geozones.edit'
+    ]);
+    $router->delete('geozones/{geozones}', [
+        'as' => 'admin.ilocations.geozones.destroy',
+        'uses' => 'GeozonesController@destroy',
+        'middleware' => 'can:ilocations.geozones.destroy'
+    ]);
 // append
 
 

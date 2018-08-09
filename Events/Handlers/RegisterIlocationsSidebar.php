@@ -37,33 +37,23 @@ class RegisterIlocationsSidebar implements \Maatwebsite\Sidebar\SidebarExtender
     public function extendWith(Menu $menu)
     {
         $menu->group(trans('core::sidebar.content'), function (Group $group) {
-            $group->item(trans('ilocations::ilocations.title.ilocations'), function (Item $item) {
-                $item->icon('fa fa-copy');
+            $group->item(trans('ilocations::common.title'), function (Item $item) {
+                $item->icon('fa fa-globe');
                 $item->weight(10);
+                $item->item(trans('ilocations::geozones.title.geozones'), function (Item $item) {
+                    $item->icon('fa fa-copy');
+                    $item->weight(0);
+                    $item->append('admin.ilocations.geozones.create');
+                    $item->route('admin.ilocations.geozones.index');
+                    $item->authorize(
+                        $this->auth->hasAccess('ilocations.geozones.index')
+                    );
+                });
+
                 $item->authorize(
-                     /* append */
+                    $this->auth->hasAccess('ilocations.geozones.index')
+
                 );
-                $item->item(trans('ilocations::countries.title.countries'), function (Item $item) {
-                    $item->icon('fa fa-copy');
-                    $item->weight(0);
-                    $item->append('admin.ilocations.country.create');
-                    $item->route('admin.ilocations.country.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('ilocations.countries.index')
-                    );
-                });
-                $item->item(trans('ilocations::provinces.title.provinces'), function (Item $item) {
-                    $item->icon('fa fa-copy');
-                    $item->weight(0);
-                    $item->append('admin.ilocations.province.create');
-                    $item->route('admin.ilocations.province.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('ilocations.provinces.index')
-                    );
-                });
-// append
-
-
             });
         });
 
