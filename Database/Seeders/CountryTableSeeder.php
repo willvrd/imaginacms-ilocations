@@ -20,7 +20,7 @@ class CountryTableSeeder extends Seeder
         Model::unguard();
 
         DB::table('ilocations__countries')->delete();
-        $path = public_path('/assets/ilocations/countries.json');
+        $path = public_path('/modules/ilocations/js/countries.json');
         $countries = json_decode(file_get_contents($path), true);
         
         foreach ($countries as $key => $country)

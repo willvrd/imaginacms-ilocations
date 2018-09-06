@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+    "0.1.2":
+        changed:
+          - route json country an provinces
     "0.1.1":
         added:
             - Geozones Entities Controller and views.
