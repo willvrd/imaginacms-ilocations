@@ -1,5 +1,10 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+    "0.1.3":
+        added:
+        - Cities by province id Migration, Seed, Entities and Controller
+        changed:
+          -  Migration geozones country,
     "0.1.2":
         changed:
           - route json country an provinces
