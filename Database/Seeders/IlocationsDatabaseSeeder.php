@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class IlocationsDatabaseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-         $this->call(CountryTableSeeder::class);
-         $this->call(ProvinceTableSeeder::class);
-    }
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    $this->call(CountryTableSeeder::class);
+    $this->call(ProvinceTableSeeder::class);
+    $this->call(CityTableSeeder::class);
+  }
 }

@@ -30,8 +30,15 @@ return [
         'create' => 'ilocations::geozonescountries.create resource',
         'edit' => 'ilocations::geozonescountries.edit resource',
         'destroy' => 'ilocations::geozonescountries.destroy resource',
-    ]
+    ],
+    'ilocations.cities' => [
+        'index' => 'ilocations::cities.list resource',
+        'create' => 'ilocations::cities.create resource',
+        'edit' => 'ilocations::cities.edit resource',
+        'destroy' => 'ilocations::cities.destroy resource',
+    ],
 // append
+
 
 
 ];

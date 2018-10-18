@@ -20,7 +20,7 @@ class CreateIlocationsProvincesTable extends Migration
             $table->text('iso_2',5);
 
             $table->integer('country_id')->unsigned();
-            $table->foreign('country_id')->references('id')->on('ilocations__countries')->onDelete('restrict');
+            $table->foreign('country_id')->references('id')->on('ilocations__countries')->onDelete('cascade');
             
             $table->timestamps();
         });
@@ -33,6 +33,11 @@ class CreateIlocationsProvincesTable extends Migration
      */
     public function down()
     {
+      Schema::table('ilocations__provinces', function (Blueprint $table) {
+        $table->dropForeign([
+          'country_id',
+        ]);
+      });
         Schema::dropIfExists('ilocations__provinces');
     }
 }

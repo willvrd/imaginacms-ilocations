@@ -103,7 +103,41 @@ $router->group(['prefix' =>'/ilocations'], function (Router $router) {
         'uses' => 'GeozonesController@destroy',
         'middleware' => 'can:ilocations.geozones.destroy'
     ]);
+    $router->bind('city', function ($id) {
+        return app('Modules\Ilocations\Repositories\CityRepository')->find($id);
+    });
+    $router->get('cities', [
+        'as' => 'admin.ilocations.city.index',
+        'uses' => 'CityController@index',
+        'middleware' => 'can:ilocations.cities.index'
+    ]);
+    $router->get('cities/create', [
+        'as' => 'admin.ilocations.city.create',
+        'uses' => 'CityController@create',
+        'middleware' => 'can:ilocations.cities.create'
+    ]);
+    $router->post('cities', [
+        'as' => 'admin.ilocations.city.store',
+        'uses' => 'CityController@store',
+        'middleware' => 'can:ilocations.cities.create'
+    ]);
+    $router->get('cities/{city}/edit', [
+        'as' => 'admin.ilocations.city.edit',
+        'uses' => 'CityController@edit',
+        'middleware' => 'can:ilocations.cities.edit'
+    ]);
+    $router->put('cities/{city}', [
+        'as' => 'admin.ilocations.city.update',
+        'uses' => 'CityController@update',
+        'middleware' => 'can:ilocations.cities.edit'
+    ]);
+    $router->delete('cities/{city}', [
+        'as' => 'admin.ilocations.city.destroy',
+        'uses' => 'CityController@destroy',
+        'middleware' => 'can:ilocations.cities.destroy'
+    ]);
 // append
+
 
 
 });

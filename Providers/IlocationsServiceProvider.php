@@ -31,7 +31,9 @@ class IlocationsServiceProvider extends ServiceProvider
         $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
             $event->load('countries', array_dot(trans('ilocations::countries')));
             $event->load('provinces', array_dot(trans('ilocations::provinces')));
+            $event->load('cities', array_dot(trans('ilocations::cities')));
             // append translations
+
 
 
         });
@@ -104,7 +106,20 @@ class IlocationsServiceProvider extends ServiceProvider
         //         return new \Modules\Ilocations\Repositories\Cache\CacheGeozonesCountriesDecorator($repository);
         //     }
         // );
+        $this->app->bind(
+            'Modules\Ilocations\Repositories\CityRepository',
+            function () {
+                $repository = new \Modules\Ilocations\Repositories\Eloquent\EloquentCityRepository(new \Modules\Ilocations\Entities\City());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Ilocations\Repositories\Cache\CacheCityDecorator($repository);
+            }
+        );
 // add bindings
+
 
     }
 }
