@@ -1,11 +1,16 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
-    "0.2.0":
+      "0.2.0":
         added:
           - api V2 - JSONAPI in cities, provinces and contries
         changed:
           - assets citiesCO json
           - geozones mirgation and entity
+    "0.1.3":
+        added:
+        - Cities by province id Migration, Seed, Entities and Controller
+        changed:
+          -  Migration geozones country,
     "0.1.2":
         changed:
           - route json country an provinces
