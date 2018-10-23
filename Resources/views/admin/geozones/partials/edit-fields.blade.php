@@ -5,6 +5,8 @@ var dataEdit="";
 var countryValue="";
 var zoneValue="";
 </script>
+
+
 <div class="box-body">
   <label>Geo Zone Name: </label>
   <input type="text" class="form-control" name="name" id="name" value="{{$geozones->name}}">
@@ -22,7 +24,7 @@ var zoneValue="";
     </div>
     <div class="col-md-4">
       <select class="form-control" name="zone" id="zone" onchange="">
-        <option value="0">All zones</option>
+        <option value="null">All zones</option>
       </select>
     </div>
     <div class="col-md-4">
@@ -37,15 +39,16 @@ var zoneValue="";
       <th></th>
     </thead>
     <tbody>
+
       @foreach($geozoneRelation as $key)
       <tr id="tr{{$loop->index}}">
-        <td><input type="text" class="form-control" value="{{$key->iso_2_country}}" readonly></td>
-        <td><input type="text" class="form-control" value="@if(is_numeric($key->iso_2_zone)) All zones @else {{$key->iso_2_zone}} @endif" readonly></td>
+        <td><input type="text" class="form-control" value="{{$key->country->name}}" readonly></td>
+        <td><input type="text" class="form-control" value="@if(!isset($key->province)) All zones @else {{$key->province->name}} @endif" readonly></td>
         <td><button type="button" class="btn btn-danger" onclick="removeRow({{$loop->index}})" name="button"><i class="fa fa-minus-circle"></i></button></td>
       </tr>
       <script type="text/javascript">
-      countryValue="{{$key->iso_2_country}}";
-      zoneValue="{{$key->iso_2_zone}}";
+      countryValue="{{$key->country->iso_2}}";
+      zoneValue="{{!isset($key->province) ? null : $key->province->iso_2}}";
       dataEdit = {countryValue, zoneValue,countTr}
       countTr++;
       geozones.push(dataEdit);

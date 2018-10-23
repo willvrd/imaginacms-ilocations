@@ -14,11 +14,17 @@ class Province extends Model
     	'name'
     ];
     protected $fillable = [
-    	'iso_2'
+    	'iso_2',
+      'country_id',
     ];
 
     public function country()
     {
     	return $this->belongsTo(Country::class);
     }
+  
+  public function zones()
+  {
+    return $this->hasMany(GeozonesCountries::class);
+  }
 }

@@ -6,4 +6,6 @@ use Modules\Core\Repositories\BaseRepository;
 
 interface ProvinceRepository extends BaseRepository
 {
+  public function findByIso2($iso2);
+  public function index($page, $take, $filter, $include, $fields);
 }

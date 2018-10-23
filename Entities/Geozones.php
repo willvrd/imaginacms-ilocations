@@ -10,5 +10,13 @@ class Geozones extends Model
 
     protected $table = 'ilocations__geozones';
 
-    protected $fillable = [];
+    protected $fillable = [
+      'name',
+      'description'
+    ];
+  
+  public function zones()
+  {
+    return $this->hasMany(GeozonesCountries::class);
+  }
 }

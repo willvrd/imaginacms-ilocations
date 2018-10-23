@@ -7,4 +7,5 @@ use Modules\Core\Repositories\BaseRepository;
 interface GeozonesRepository extends BaseRepository
 {
   public function getAll();
+  
 }

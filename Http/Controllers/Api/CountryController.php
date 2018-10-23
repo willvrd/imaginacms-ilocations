@@ -18,6 +18,7 @@ class CountryController extends BasePublicController
   {
     \App::setLocale('en');
     try {
+      
       $countries = Country::where('status', 1)->get()->sortBy('name');
       $allMinCountries = [];
       foreach ($countries as $key => $country) {

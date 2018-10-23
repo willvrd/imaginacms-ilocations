@@ -14,6 +14,18 @@ class City extends Model
     'name'
   ];
   protected $fillable = [
-    'code'
+    'code',
+    'province_id',
+    'country_id'
   ];
+  
+  public function country()
+  {
+    return $this->belongsTo(Country::class);
+  }
+  
+  public function province()
+  {
+    return $this->belongsTo(Province::class);
+  }
 }

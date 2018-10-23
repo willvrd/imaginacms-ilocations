@@ -32,4 +32,14 @@ class Country extends Model
   {
     return $this->hasMany(Province::class);
   }
+  
+  public function cities()
+  {
+    return $this->hasMany(City::class);
+  }
+  
+  public function zones()
+  {
+    return $this->hasMany(GeozonesCountries::class);
+  }
 }

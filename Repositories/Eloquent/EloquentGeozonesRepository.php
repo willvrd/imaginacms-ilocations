@@ -10,4 +10,6 @@ class EloquentGeozonesRepository extends EloquentBaseRepository implements Geozo
   public function getAll(){
     return $this->model->orderBy('name','asc')->get();
   }
+  
+ 
 }

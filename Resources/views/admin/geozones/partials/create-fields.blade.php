@@ -15,7 +15,7 @@
   </div>
   <div class="col-md-4">
     <select class="form-control" name="zone" id="zone" onchange="">
-      <option value="0">All zones</option>
+      <option value="null">All zones</option>
     </select>
   </div>
   <div class="col-md-4">

@@ -18,6 +18,9 @@ class CreateIlocationsCitiesTable extends Migration
       // Your fields
       
       $table->text('code', 6);
+  
+      $table->integer('country_id')->unsigned();
+      $table->foreign('country_id')->references('id')->on('ilocations__countries')->onDelete('cascade');
       
       $table->integer('province_id')->unsigned();
       $table->foreign('province_id')->references('id')->on('ilocations__provinces')->onDelete('cascade');
@@ -36,6 +39,9 @@ class CreateIlocationsCitiesTable extends Migration
     Schema::table('ilocations__cities', function (Blueprint $table) {
       $table->dropForeign([
         'province_id',
+      ]);
+      $table->dropForeign([
+        'country_id',
       ]);
     });
     Schema::dropIfExists('ilocations__cities');
