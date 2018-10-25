@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.2.1":
+        added:
+         - function whereByCountry in CityRepositories
       "0.2.0":
         added:
           - api V2 - JSONAPI in cities, provinces and contries

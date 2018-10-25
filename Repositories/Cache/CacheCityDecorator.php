@@ -13,4 +13,22 @@ class CacheCityDecorator extends BaseCacheDecorator implements CityRepository
         $this->entityName = 'ilocations.cities';
         $this->repository = $city;
     }
+
+
+    public function whereByCountry($id)
+    {
+
+        return $this->remember(function () use ($id) {
+            return $this->repository->whereByCountry($id);
+        });
+    }
+
+    public function index($page, $take, $filter, $include, $fields)
+    {
+
+        return $this->remember(function () use ($page, $take, $filter, $include, $fields) {
+            return $this->repository->index($page, $take, $filter, $include, $fields);
+        });
+
+    }
 }

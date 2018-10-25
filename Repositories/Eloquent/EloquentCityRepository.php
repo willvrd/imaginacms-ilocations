@@ -52,6 +52,10 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     
     
   }
-  
+
+  public  function whereByCountry($id){
+
+      return $this->model->where('country_id',$id)->get();
+  }
   
 }
