@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Ilocations\Transformers\ProvinceTransformer;
-use Modules\Ihelpers\Http\Controllers\BaseApiController;
+use Modules\Ihelpers\Http\Controllers\Api\BaseApiController;
 use Modules\Ilocations\Repositories\ProvinceRepository;
 
 class ProvinceApiController extends BaseApiController

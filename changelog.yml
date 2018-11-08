@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.2.3":
+        change:
+         - use BaseApiController
       "0.2.1":
         added:
          - function whereByCountry in CityRepositories
