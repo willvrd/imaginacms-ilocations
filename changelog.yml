@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.2.4":
+        added:
+          - CityApiController Try Catch
       "0.2.3":
         change:
          - use BaseApiController

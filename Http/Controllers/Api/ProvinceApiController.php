@@ -26,7 +26,7 @@ class ProvinceApiController extends BaseApiController
   
   public function index(Request $request)
 {
-  //try {
+  try {
     //Get Parameters from URL.
     $p = $this->parametersUrl(false, false, ["status" => [1]], []);
 
@@ -38,13 +38,13 @@ class ProvinceApiController extends BaseApiController
     
     //If request pagination add meta-page
     $p->page ? $response["meta"] = ["page" => $this->pageTransformer($provinces)] : false;
- /* } catch (\Exception $e) {
+  } catch (\Exception $e) {
     //Message Error
     $status = 500;
     $response = [
       "errors" => $e->getMessage()
     ];
-  }*/
+  }
   
   return response()->json($response, $status ?? 200);
 }
