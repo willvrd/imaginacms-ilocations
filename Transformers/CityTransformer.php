@@ -8,9 +8,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 class CityTransformer extends Resource
 {
   public function toArray($request){
+
+      $includes = explode(",", $request->include);
     $data = [
       "id" => $this->id,
-      'name' => $this->name,
+      'name' => $this->translate('en')->name,
     ];
   
     if(isset($this->code))
@@ -33,6 +35,14 @@ class CityTransformer extends Resource
   
     if(isset($this->created_at))
       $data["created_at"]=$this->created_at;
+
+
+      if (in_array('province', $includes)) {
+          $data["province"] = new ProvinceTransformer($this->province);
+      }
+      if (in_array('country', $includes)) {
+          $data["country"] = new CountryTransformer($this->country);
+      }
     
     return $data;
   }

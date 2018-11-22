@@ -12,8 +12,7 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
    
     //Initialize Query
     $query = $this->model->query();
-    $query->leftJoin('ilocations__province_translations','ilocations__provinces.id', 'province_id');
-    $query->where("locale","en");
+      $query->with('translations');
   
     
     /*== FILTER ==*/
@@ -29,7 +28,7 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
    
   
     /*== FIELDS ==*/
-      $defaultFields = ["ilocations__provinces.id","name"];
+      $defaultFields = ["id"];
 
       /*filter by user*/
       $query->select(array_merge($defaultFields, $fields));

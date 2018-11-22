@@ -13,13 +13,26 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
     
     //Initialize Query
     $query = $this->model->query();
-    $query->leftJoin('ilocations__country_translations','ilocations__countries.id', 'country_id');
-    $query->where("locale","en");
-  
+    $query->with('translations');
     $query->where("status","<>","-1");
     /*== FILTER ==*/
     if ($filter) {
-      
+        if (isset($filter->search)) { //si hay que filtrar por rango de precio
+            $criterion = $filter->search;
+            $param = explode(' ', $criterion);
+            $query->where(function ($query) use ($param) {
+                foreach ($param as $index => $word) {
+                    if ($index == 0) {
+                        $query->where('name', 'like', "%" . $word . "%");
+                        $query->orWhere('full name', 'like', "%" . $word . "%");
+                    } else {
+                        $query->orWhere('title', 'like', "%" . $word . "%");
+                        $query->orWhere('sku', 'like', "%" . $word . "%");
+                    }
+                }
+
+            });
+        }
     }
     
     /*== RELATIONSHIPS ==*/
@@ -31,13 +44,13 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
     }
   
     /*== FIELDS ==*/
-    if ($fields) {
-      $defaultFields = ["ilocations__countries.id","name"];
+
+      $defaultFields = ["id"];
     
       /*filter by user*/
       $query->select(array_merge($defaultFields, $fields));
     
-    }
+
   
     //Return request with pagination
     if ($page) {

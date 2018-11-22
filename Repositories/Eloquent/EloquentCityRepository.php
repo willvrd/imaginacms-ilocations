@@ -32,8 +32,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
       $query->select(array_merge($defaultFields, $fields));
 
     
-    $query->leftJoin('ilocations__city_translations','ilocations__cities.id', 'city_id');
-    $query->where("locale","en");
+
     
     //Return request with pagination
     if ($page) {
