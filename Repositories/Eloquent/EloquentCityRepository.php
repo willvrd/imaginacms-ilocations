@@ -28,7 +28,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     
     
     /*== FIELDS ==*/
-      $defaultFields = ["ilocations__cities.id","name"];
+      $defaultFields = ["id"];
       $query->select(array_merge($defaultFields, $fields));
 
     

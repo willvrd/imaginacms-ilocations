@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.2.7":
+        changed:
+          - Fiels in EloquentCityReposiory
       "0.2.5":
         changed:
           - Tranformers name trasnlate and validation filters
