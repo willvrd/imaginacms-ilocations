@@ -1,5 +1,9 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.2.8":
+        added:
+          - call Metod in Province, City , Country Entities.
+          - index realtions in config file
       "0.2.7":
         changed:
           - Fiels in EloquentCityReposiory
