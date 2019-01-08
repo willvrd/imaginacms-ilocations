@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.2.9":
+        added:
+          - publishConfig config in IlocationsServiceProvider
       "0.2.8":
         added:
           - call Metod in Province, City , Country Entities.

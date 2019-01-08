@@ -42,7 +42,7 @@ class IlocationsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishConfig('ilocations', 'permissions');
-
+        $this->publishConfig('ilocations', 'config');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
