@@ -23,29 +23,67 @@ class CityApiController extends BaseApiController
     $this->city = $city;
     
   }
-  
-  public function index(Request $request)
-  {
-    try {
-    //Get Parameters from URL.
-    $p = $this->parametersUrl(false, false, ["status" => [1]], []);
 
-    //Request to Repository
-    $cities = $this->city->index($p->page, $p->take, $p->filter, $p->include, $p->fields);
+  
+  /**
+     * GET ITEMS
+     * 
+     * @return mixed
+     */
+    public function index(Request $request)
+    {
+      try {
+        //Get Parameters from URL.
+        $params = $this->getParamsRequest($request);
+  
+        //Request to Repository
+        $dataEntity = $this->city->getItemsBy($params);
+  
+        //Response
+        $response = ["data" => CityTransformer::collection($dataEntity)];
+  
+        //If request pagination add meta-page
+        $params->page ? $response["meta"] = ["page" => $this->pageTransformer($dataEntity)] : false;
+      } catch (\Exception $e) {
+        $status = $this->getStatusError($e->getCode());
+        $response = ["errors" => $e->getMessage()];
+      }
+  
+      //Return response
+      return response()->json($response ?? ["data" => "Request successful"], $status ?? 200);
+    }
     
-    //Response
-    $response = ["data" => CityTransformer::collection($cities)];
+    /**
+       * GET A ITEM
+       * 
+       * @param $criteria
+       * @return mixed
+       */
+      public function show($criteria,Request $request)
+      {
+        try {
+          //Get Parameters from URL.
+          $params = $this->getParamsRequest($request);
     
-    //If request pagination add meta-page
-    $p->page ? $response["meta"] = ["page" => $this->pageTransformer($cities)] : false;
-     } catch (\Exception $e) {
-       //Message Error
-       $status = 500;
-       $response = [
-         "errors" => $e->getMessage()
-       ];
-     }
+          //Request to Repository
+          $dataEntity = $this->city->getItem($criteria, $params);
     
-    return response()->json($response, $status ?? 200);
-  }
+          //Break if no found item
+          if(!$dataEntity) throw new Exception('Item not found',204);
+          
+          //Response
+          $response = ["data" => new CityTransformer($dataEntity)];
+    
+          //If request pagination add meta-page
+          $params->page ? $response["meta"] = ["page" => $this->pageTransformer($dataEntity)] : false;
+        } catch (\Exception $e) {
+          $status = $this->getStatusError($e->getCode());
+          $response = ["errors" => $e->getMessage()];
+        }
+    
+        //Return response
+        return response()->json($response ?? ["data" => "Request successful"], $status ?? 200);
+      }
+  
+  
 }

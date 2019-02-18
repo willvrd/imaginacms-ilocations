@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.3.0":
+        changed:
+          - Transformers files, Api controllers and Repositories to the new version of the standard
       "0.2.9":
         added:
           - publishConfig config in IlocationsServiceProvider

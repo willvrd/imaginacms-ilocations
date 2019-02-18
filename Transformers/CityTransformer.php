@@ -7,43 +7,19 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CityTransformer extends Resource
 {
-  public function toArray($request){
-
-      $includes = explode(",", $request->include);
-    $data = [
-      "id" => $this->id,
-      'name' => $this->translate('en')->name,
-    ];
-  
-    if(isset($this->code))
-      $data["code"]=$this->code;
-  
-    if(isset($this->province_id))
-      $data["province_id"]=$this->province_id;
-    
-    if(isset($this->country_id))
-      $data["country_id"]=$this->country_id;
-  
-    if(isset($this->province))
-      $data["province"]=$this->province;
-    
-    if(isset($this->country_id))
-      $data["country_id"]=$this->country_id;
-  
-    if(isset($this->updated_at))
-      $data["updated_at"]=$this->updated_at;
-  
-    if(isset($this->created_at))
-      $data["created_at"]=$this->created_at;
+    public function toArray($request)
+    {
 
 
-      if (in_array('province', $includes)) {
-          $data["province"] = new ProvinceTransformer($this->province);
-      }
-      if (in_array('country', $includes)) {
-          $data["country"] = new CountryTransformer($this->country);
-      }
-    
-    return $data;
-  }
+        $data = [
+
+            'id' => $this->when($this->id, $this->id),
+            'name' => $this->when($this->name, $this->translate('en')->name),
+            'code' => $this->when($this->code, $this->code),
+            'updated_at' => $this->when($this->updated_at, $this->updated_at),
+            'provinces' => new ProvinceTransformer($this->whenLoaded('provinces')),
+            'country' => new CountryTransformer($this->whenLoaded('country')),
+        ];
+        return $data;
+    }
 }

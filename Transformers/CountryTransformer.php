@@ -10,60 +10,26 @@ class CountryTransformer extends Resource
     public function toArray($request)
     {
 
-        $includes = explode(",", $request->include);
+
         $data = [
-            "id" => $this->id,
-            'name' => $this->translate('en')->name,
+            'id'=>$this->when($this->id,$this->id),
+            'name'=>$this->when($this->name,$this->translate('en')->name),
+            'full_name'=>$this->when($this->full_name,$this->full_name),
+            'iso_2'=>$this->when($this->iso_2,$this->iso_2),
+            'status'=>$this->when($this->status,$this->status),
+            'currency'=>$this->when($this->currency,$this->currency),
+            'currency_symbol'=>$this->when($this->currency_symbol,$this->currency_symbol),
+            'currency_code'=>$this->when($this->currency_code,$this->currency_code),
+            'currency_sub_unit'=>$this->when($this->currency_sub_unit,$this->currency_sub_unit),
+            'region_code'=>$this->when($this->region_code,$this->region_code),
+            'country_code'=>$this->when($this->country_code,$this->country_code),
+            'iso_3'=>$this->when($this->iso_3,$this->iso_3),
+            'calling_code'=>$this->when($this->calling_code,$this->calling_code),
+            'updated_at'=>$this->when($this->updated_at,$this->updated_at),
+            'provinces'=> ProvinceTransformer::collection($this->whenLoaded('provinces')),
+            'cities'=> CityTransformer::collection($this->whenLoaded('cities')),
+
         ];
-        if (isset($this->full_name))
-            $data["full_name"] = $this->full_name;
-
-        if (isset($this->iso_2))
-            $data["iso_2"] = $this->iso_2;
-
-        if (isset($this->status))
-            $data["status"] = $this->status;
-
-        if (isset($this->currency))
-            $data["currency"] = $this->currency;
-
-        if (isset($this->currency_symbol))
-            $data["currency_symbol"] = $this->currency_symbol;
-
-        if (isset($this->currency_code))
-            $data["currency_code"] = $this->currency_code;
-
-        if (isset($this->currency_sub_unit))
-            $data["currency_sub_unit"] = $this->currency_sub_unit;
-
-        if (isset($this->region_code))
-            $data["region_code"] = $this->region_code;
-
-        if (isset($this->sub_region_code))
-            $data["sub_region_code"] = $this->sub_region_code;
-
-        if (isset($this->country_code))
-            $data["country_code"] = $this->country_code;
-
-        if (isset($this->iso_3))
-            $data["iso_3"] = $this->iso_3;
-
-        if (isset($this->calling_code))
-            $data["calling_code"] = $this->calling_code;
-
-        if (isset($this->updated_at))
-            $data["updated_at"] = $this->updated_at;
-
-        if (isset($this->created_at))
-            $data["created_at"] = $this->created_at;
-
-        if (in_array('provinces', $includes)) {
-            $data["provinces"] = ProvinceTransformer::collection($this->provinces);
-        }
-        if (in_array('cities', $includes)) {
-            $data["cities"] = CityTransformer::collection($this->cities);
-        }
-
             return $data;
     }
 }

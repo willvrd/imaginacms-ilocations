@@ -11,22 +11,27 @@ class Province extends Model
 
     protected $table = 'ilocations__provinces';
     public $translatedAttributes = [
-    	'name'
+        'name'
     ];
     protected $fillable = [
-    	'iso_2',
-      'country_id',
+        'iso_2',
+        'country_id',
     ];
 
     public function country()
     {
-    	return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class);
     }
-  
-  public function zones()
-  {
-    return $this->hasMany(GeozonesCountries::class);
-  }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
+    public function zones()
+    {
+        return $this->hasMany(GeozonesCountries::class);
+    }
 
     public function __call($method, $parameters)
     {
