@@ -14,7 +14,7 @@ class CityTransformer extends Resource
         $data = [
 
             'id' => $this->when($this->id, $this->id),
-            'name' => $this->when($this->name, $this->translate('en')->name),
+            'name'=> $this->when($this->translate('en')->name,$this->translate('en')->name),
             'code' => $this->when($this->code, $this->code),
             'updated_at' => $this->when($this->updated_at, $this->updated_at),
             'provinces' => new ProvinceTransformer($this->whenLoaded('provinces')),

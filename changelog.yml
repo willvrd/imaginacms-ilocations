@@ -1,5 +1,8 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.3.1":
+        changed:
+          Version minimun Ihelpes Requested
       "0.3.0":
         changed:
           - Transformers files, Api controllers and Repositories to the new version of the standard

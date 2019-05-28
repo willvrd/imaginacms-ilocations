@@ -13,7 +13,7 @@ class CountryTransformer extends Resource
 
         $data = [
             'id'=>$this->when($this->id,$this->id),
-            'name'=>$this->when($this->name,$this->translate('en')->name),
+            'name'=> $this->when($this->translate('en')->name,$this->translate('en')->name),
             'full_name'=>$this->when($this->full_name,$this->full_name),
             'iso_2'=>$this->when($this->iso_2,$this->iso_2),
             'status'=>$this->when($this->status,$this->status),
