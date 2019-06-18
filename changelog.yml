@@ -1,5 +1,9 @@
 url: https://github.com/imagina/asgardcms-ilocations
 versions:
+      "0.3.2":
+        added:
+          - Cache methods Country, Geozones, Provinces
+          - filter countryCode in getItems Method of EloquentProvinceRepository
       "0.3.1":
         changed:
           Version minimun Ihelpes Requested

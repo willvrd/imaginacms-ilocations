@@ -13,4 +13,12 @@ class CacheGeozonesDecorator extends BaseCacheDecorator implements GeozonesRepos
         $this->entityName = 'ilocations.geozones';
         $this->repository = $geozones;
     }
+
+    public function getAll()
+    {
+        return $this->remember(function () {
+            return $this->repository->getAll();
+        });
+
+    }
 }

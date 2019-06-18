@@ -13,4 +13,18 @@ class CacheCountryDecorator extends BaseCacheDecorator implements CountryReposit
         $this->entityName = 'ilocations.countries';
         $this->repository = $country;
     }
+
+    public function findByIso2($iso2)
+    {
+        return $this->remember(function () use ($iso2) {
+            return $this->repository->findByIso2($iso2);
+        });
+    }
+
+    public function index($page, $take, $filter, $include, $fields)
+    {
+        return $this->remember(function () use ($page, $take, $filter, $include, $fields) {
+            return $this->repository->index($page, $take, $filter, $include, $fields);
+        });
+    }
 }

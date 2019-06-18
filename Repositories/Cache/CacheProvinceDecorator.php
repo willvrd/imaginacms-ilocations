@@ -13,4 +13,18 @@ class CacheProvinceDecorator extends BaseCacheDecorator implements ProvinceRepos
         $this->entityName = 'ilocations.provinces';
         $this->repository = $province;
     }
+
+    public function findByIso2($iso2)
+    {
+        return $this->remember(function () use ($iso2) {
+            return $this->repository->findByIso2($iso2);
+        });
+    }
+
+    public function index($page, $take, $filter, $include, $fields)
+    {
+        return $this->remember(function () use ($page, $take, $filter, $include, $fields) {
+            return $this->repository->index($page, $take, $filter, $include, $fields);
+        });
+    }
 }
