@@ -17,11 +17,11 @@ class CityTableSeeder extends Seeder
   public function run()
   {
     Model::unguard();
-    
-    DB::table('ilocations__cities')->delete();
+
+    DB::table('ilocations__cities')->truncate();
     $path = public_path('/modules/ilocations/js/citiesCO.json');
     $cities = json_decode(file_get_contents($path), true);
- 
+
     foreach ($cities as $key => $city)
       City::create($city);
   }

@@ -33,6 +33,10 @@ class Province extends Model
         return $this->hasMany(GeozonesCountries::class);
     }
 
+    public function geozones()
+    {
+      return $this->morphToMany(Geozones::class, 'geozonable');
+    }
     public function __call($method, $parameters)
     {
         #i: Convert array to dot notation

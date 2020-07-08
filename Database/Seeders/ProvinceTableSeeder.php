@@ -19,12 +19,12 @@ class ProvinceTableSeeder extends Seeder
     {
         Model::unguard();
 
-        DB::table('ilocations__provinces')->delete();
+        DB::table('ilocations__provinces')->truncate();
         $path = public_path('/modules/ilocations/js/provinces.json');
         $provinces = json_decode(file_get_contents($path), true);
         $countries = Country::all();
 
-        foreach ($countries as $key => $country) 
+        foreach ($countries as $key => $country)
             foreach ($provinces as $key => $province)
                 if($country->iso_2 == $province['country'])
                     Province::create([

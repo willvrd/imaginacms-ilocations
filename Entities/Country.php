@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
   use Translatable;
-  
+
   protected $table = 'ilocations__countries';
   public $translatedAttributes = [
     'name',
@@ -20,27 +20,27 @@ class Country extends Model
     'currency_code',
     'currency_sub_unit',
     'region_code',
-    'sub-region-code',
+    'sub_region_code',
     'country_code',
     'iso_2',
     'iso_3',
     'calling_code',
     'status'
   ];
-  
+
   public function provinces()
   {
     return $this->hasMany(Province::class);
   }
-  
+
   public function cities()
   {
     return $this->hasMany(City::class);
   }
-  
-  public function zones()
+
+  public function geozones()
   {
-    return $this->hasMany(GeozonesCountries::class);
+    return $this->morphToMany(Geozones::class, 'geozonable', 'ilocations__geozonables', 'geozone_id');
   }
 
     public function __call($method, $parameters)

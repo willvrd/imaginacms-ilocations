@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Ihelpers\Http\Controllers\Api\BaseApiController;
+use Modules\Ilocations\Http\Requests\CreateProvinceRequest;
+use Modules\Ilocations\Http\Requests\UpdateProvinceRequest;
 use Modules\Ilocations\Repositories\ProvinceRepository;
 use Modules\Ilocations\Transformers\ProvinceTransformer;
 
@@ -39,7 +41,7 @@ class ProvinceApiController extends BaseApiController
             $dataEntity = $this->province->getItemsBy($params);
 
             //Response
-            $response = ["data" =>  ProvinceTransformer::collection($dataEntity)];
+            $response = ["data" => ProvinceTransformer::collection($dataEntity)];
 
             //If request pagination add meta-page
             $params->page ? $response["meta"] = ["page" => $this->pageTransformer($dataEntity)] : false;
@@ -50,5 +52,64 @@ class ProvinceApiController extends BaseApiController
 
         //Return response
         return response()->json($response ?? ["data" => "Request successful"], $status ?? 200);
+    }
+
+    public function create(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $data = $request->input('attributes') ?? [];
+            $this->validateRequestApi(new CreateProvinceRequest($data));
+            $province = $this->province->create($data);
+            $response = ['data' => new ProvinceTransformer($province)];
+            $status = 200;
+            DB::commit();
+        } catch (Exception $exception) {
+            Log::Error($exception);
+            DB::rollback();
+            $status = $this->getStatusError($exception->getCode());
+            $response = ['errors' => $exception->getMessage()];
+        }
+        return response()->json($response, $status);
+    }
+
+    public function update($criteria, Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $data = $request->input('attributes') ?? [];
+            $this->validateRequestApi(new UpdateProvinceRequest($data));
+            $params = $this->getParamsRequest($request);
+            $province = $this->province->getItem($criteria, $params);
+            $this->province->update($province, $data);
+            $response = ['data' => new ProvinceTransformer($province)];
+            $status = 200;
+            DB::commit();
+        } catch (Exception $exception) {
+            Log::Error($exception);
+            DB::rollback();
+            $status = $this->getStatusError($exception->getCode());
+            $response = ['errors' => $exception->getMessage()];
+        }
+        return response()->json($response, $status);
+    }
+
+    public function delete($criteria, Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $params = $this->getParamsRequest($request);
+            $province = $this->province->getItem($criteria, $params);
+            $this->province->destroy($province);
+            $response = ['data' => true];
+            $status = 200;
+            DB::commit();
+        } catch (Exception $exception) {
+            Log::Error($exception);
+            DB::rollback();
+            $status = $this->getStatusError($exception->getCode());
+            $response = ['errors' => $exception->getMessage()];
+        }
+        return response()->json($response, $status);
     }
 }
