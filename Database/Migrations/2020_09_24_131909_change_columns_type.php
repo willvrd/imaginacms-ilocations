@@ -21,7 +21,7 @@ class ChangeColumnsType extends Migration
       });
       
          Schema::table('ilocations__countries', function (Blueprint $table) {
-         $table->string('currency')->default("")->nullable()->change();
+          $table->string('currency')->default("")->nullable()->change();
           $table->string('currency_symbol')->default("")->nullable()->change();
           $table->string('currency_code')->default("")->nullable()->change();
           $table->string('currency_sub_unit')->default("")->nullable()->change();
@@ -29,6 +29,7 @@ class ChangeColumnsType extends Migration
           $table->string('sub_region_code')->default("")->nullable()->change();
           $table->string('iso_2')->default("")->nullable()->change();
           $table->string('iso_3')->default("")->nullable()->change();
+          
       });
       
        Schema::table('ilocations__provinces', function (Blueprint $table) {
