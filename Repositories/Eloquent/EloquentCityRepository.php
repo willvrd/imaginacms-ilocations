@@ -16,7 +16,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
         /*== FILTER ==*/
         if ($filter) {
             /**
-             * DEPRECATED: Use $filter->country or $filter->province instead
+             * @deprecated Use $filter->country or $filter->province instead
              */
             if (isset($filter->country_id))
                 $query->where("country_id", $filter->country_id);
