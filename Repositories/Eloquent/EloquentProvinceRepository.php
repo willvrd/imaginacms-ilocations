@@ -17,8 +17,8 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
 
         /*== FILTER ==*/
         if ($filter) {
-            if (isset($filter->country_id))
-                $query->where("country_id", $filter->country_id);
+            if (isset($filter->country))
+                $query->where("country_id", $filter->country);
         }
 
         /*== RELATIONSHIPS ==*/
