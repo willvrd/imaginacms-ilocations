@@ -54,7 +54,7 @@ class CountryController extends BasePublicController
     \App::setLocale('en');
     try {
     $country = Country::where('iso_2', $countryCode)->first();
-    if (count($country))
+    if (isset($country->id))
       $provinces = Province::where('country_id', $country->id)->get()->sortBy('name');
     else
       return response()->json('Country not Found', 404);
