@@ -74,10 +74,21 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
         /*== FILTERS ==*/
         if (isset($params->filter)) {
             $filter = $params->filter;//Short filter
-
+          /**
+           * @deprecated Use $filter->countryId
+           */
             if (isset($filter->country)) {
                 $query->where("country_id", $filter->country);
             }
+            
+            if (isset($filter->countryId)) {
+                $query->where("country_id", $filter->countryId);
+            }
+            
+            if (isset($filter->iso2)) {
+                $query->where("iso_2", $filter->iso2);
+            }
+            
             if (isset($filter->countryCode)) {
                 $code=$filter->countryCode;
                 $query->whereHas("country", function ($q) use ($code) {

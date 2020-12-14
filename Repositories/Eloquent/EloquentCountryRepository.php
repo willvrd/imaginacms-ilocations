@@ -125,6 +125,10 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
           if (isset($params->filter)) {
             $filter = $params->filter;//Short filter
 
+            if(isset($filter->iso2)){
+              $query->where('iso_2',$filter->iso2);
+            }
+            
               if (isset($filter->search)) { //si hay que filtrar por rango de precio
                   $criterion = $filter->search;
                   $param = explode(' ', $criterion);
