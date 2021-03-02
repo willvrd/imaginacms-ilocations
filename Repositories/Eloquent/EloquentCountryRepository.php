@@ -163,6 +163,16 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
             }
           }
 
+          $availableCountries = json_decode(setting("ilocations::availableCountries", null, "[]"));
+          /*=== SETTINGS ===*/
+          if (!empty($availableCountries) && !isset($params->filter->indexAll)) {
+            if (!isset($params->permissions['ilocations.countries.manage']) || (!$params->permissions['ilocations.countries.manage'])) {
+             
+              $query->whereIn('iso_2', $availableCountries);
+      
+            }
+          }
+
           /*== FIELDS ==*/
           if (isset($params->fields) && count($params->fields))
             $query->select($params->fields);
