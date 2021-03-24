@@ -13,4 +13,7 @@ return [
     ],
     'validation' => [
     ],
+  'settings' => [
+    'availableCountries' => 'Available Countries'
+  ],
 ];

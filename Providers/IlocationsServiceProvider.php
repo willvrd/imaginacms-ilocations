@@ -2,6 +2,7 @@
 
 namespace Modules\Ilocations\Providers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Core\Events\BuildingSidebar;
@@ -44,6 +45,8 @@ class IlocationsServiceProvider extends ServiceProvider
     {
         $this->publishConfig('ilocations', 'permissions');
         $this->publishConfig('ilocations', 'config');
+      $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'settings'), "asgard.ilocations.settings");
+      $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'settings-fields'), "asgard.ilocations.settings-fields");
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 

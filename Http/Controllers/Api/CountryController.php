@@ -14,7 +14,7 @@ use Modules\Ilocations\Entities\Province;
 class CountryController extends BasePublicController
 {
 
-    public function allMinCountries()
+  public function allMinCountries()
   {
     \App::setLocale('en');
     try {
@@ -53,22 +53,21 @@ class CountryController extends BasePublicController
   {
     \App::setLocale('en');
     try {
+    $country = Country::where('iso_2', $countryCode)->first();
+    if (isset($country->id))
+      $provinces = Province::where('country_id', $country->id)->get()->sortBy('name');
+    else
+      return response()->json('Country not Found', 404);
 
-        $country = Country::where('iso_2', $countryCode)->first();
-        if (!empty($country))
-            $provinces = Province::where('country_id', $country->id)->get()->sortBy('name');
-        else
-          return response()->json('Country not Found', 404);
-
-        $allProvincesByCountryIso2 = [];
-        foreach ($provinces as $key => $province) {
-          array_push($allProvincesByCountryIso2, [
-            'name' => $province->name,
-            'iso_2' => $province->iso_2,
-            'id' => $province->id,
-          ]);
-        }
-        return response()->json($allProvincesByCountryIso2, 200);
+    $allProvincesByCountryIso2 = [];
+    foreach ($provinces as $key => $province) {
+      array_push($allProvincesByCountryIso2, [
+        'name' => $province->name,
+        'iso_2' => $province->iso_2,
+        'id' => $province->id,
+      ]);
+    }
+    return response()->json($allProvincesByCountryIso2, 200);
     } catch (Exception $e) {
       return response()->json($e->getMessage(), $e->status);
     }
@@ -79,7 +78,7 @@ class CountryController extends BasePublicController
     \App::setLocale('en');
     try{
     $country = Country::where('iso_3', $countryCode)->first();
-    if (count($country))
+    if (isset($country->id))
       $provinces = Province::where('country_id', $country->id)->get()->sortBy('name');
     else
       return response()->json('Country not Found', 404);
@@ -102,7 +101,7 @@ class CountryController extends BasePublicController
     \App::setLocale('en');
     try{
     $province = Province::find($provinceId);
-    if (count($province))
+    if (!empty($province))
       $cities = City::where('province_id', $provinceId)->get()->sortBy('name');
     else
       return response()->json('Country not Found', 404);
