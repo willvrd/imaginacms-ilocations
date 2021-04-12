@@ -1,0 +1,13 @@
+{
+  "1":{
+    "name": "Colombia",
+    "description": "Zona para Colombia",
+    "zones": {
+      "1": {
+        "country_id": 48,
+        "province_id": null,
+        "city_id": null
+      }
+    }
+  }
+}
