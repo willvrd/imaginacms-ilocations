@@ -5,6 +5,7 @@ namespace Modules\Ilocations\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Ilocations\Entities\Geozones;
+use Modules\Ilocations\Entities\GeozonesCountries;
 
 class GeozoneTableSeeder extends Seeder
 {
@@ -22,8 +23,10 @@ class GeozoneTableSeeder extends Seeder
       foreach ($geozones as $key => &$geozone) {
           $zones = $geozone['zones'];
           unset($geozone['zones']);
-          $geozoneCreated = Geozones::create($geozone);
-          $geozoneCreated->zonesToGeoZone()->createMany($zones);
+          $geozoneCreated = Geozones::updateOrCreate($geozone);
+          foreach($zones as &$zone){
+              GeozonesCountries::updateOrCreate($zone);
+          }
       }
 
 
