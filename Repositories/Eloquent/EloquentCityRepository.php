@@ -89,6 +89,11 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
       if (isset($filter->provinceId))
         $query->where("province_id", $filter->provinceId);
 
+      if (isset($filter->country))
+        $query->where("country_id", $filter->countryId);
+      if (isset($filter->province))
+        $query->where("province_id", $filter->provinceId);
+
       //Filter by date
       if (isset($filter->date)) {
         $date = $filter->date;//Short filter date
