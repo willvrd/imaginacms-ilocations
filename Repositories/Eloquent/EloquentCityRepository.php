@@ -63,7 +63,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     $query = $this->model->query();
     
     /*== RELATIONSHIPS ==*/
-    if (in_array('*', $params->include ?? [])) {//If Request all relationships
+    if (in_array('*', $params->include)) {//If Request all relationships
       $query->with(['province', 'country']);
     } else {//Especific relationships
       $includeDefault = [];//Default relationships
@@ -89,6 +89,11 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
       if (isset($filter->provinceId))
         $query->where("province_id", $filter->provinceId);
    
+      if (isset($filter->country))
+        $query->where("country_id", $filter->country);
+      if (isset($filter->province))
+        $query->where("province_id", $filter->province);
+
       //Filter by date
       if (isset($filter->date)) {
         $date = $filter->date;//Short filter date
@@ -128,7 +133,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     if (isset($params->page) && $params->page) {
       return $query->paginate($params->take);
     } else {
-      isset($params->take) && $params->take ? $query->take($params->take) : false;//Take
+      $params->take ? $query->take($params->take) : false;//Take
       return $query->get();
     }
   }
