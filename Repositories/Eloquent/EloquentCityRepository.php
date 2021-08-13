@@ -63,7 +63,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     $query = $this->model->query();
     
     /*== RELATIONSHIPS ==*/
-    if (in_array('*', $params->include)) {//If Request all relationships
+    if (in_array('*', $params->include ?? [])) {//If Request all relationships
       $query->with(['province', 'country']);
     } else {//Especific relationships
       $includeDefault = [];//Default relationships
@@ -133,7 +133,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     if (isset($params->page) && $params->page) {
       return $query->paginate($params->take);
     } else {
-      $params->take ? $query->take($params->take) : false;//Take
+      isset($params->take) && $params->take ? $query->take($params->take) : false;//Take
       return $query->get();
     }
   }
