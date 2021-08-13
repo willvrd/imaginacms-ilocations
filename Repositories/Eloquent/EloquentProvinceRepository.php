@@ -112,7 +112,19 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
                 $query->orderBy($orderByField, $orderWay);//Add order to query
             }
         }
+  
+  
+      $availableProvinces = json_decode(setting("ilocations::availableProvinces", null, "[]"));
 
+      /*=== SETTINGS ===*/
+      if (!empty($availableProvinces) && !isset($params->filter->indexAll)) {
+        if (!isset($params->permissions['ilocations.provinces.manage']) || (!$params->permissions['ilocations.provinces.manage'])) {
+      
+          $query->whereIn('iso_2', $availableProvinces);
+      
+        }
+      }
+ 
         /*== FIELDS ==*/
         if (isset($params->fields) && count($params->fields))
             $query->select($params->fields);

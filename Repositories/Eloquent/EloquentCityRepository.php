@@ -63,7 +63,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     $query = $this->model->query();
     
     /*== RELATIONSHIPS ==*/
-    if (in_array('*', $params->include)) {//If Request all relationships
+    if (in_array('*', $params->include ?? [])) {//If Request all relationships
       $query->with(['province', 'country']);
     } else {//Especific relationships
       $includeDefault = [];//Default relationships
@@ -106,6 +106,19 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
         $query->orderBy($orderByField, $orderWay);//Add order to query
       }
     }
+  
+  
+    $availableCities = json_decode(setting("ilocations::availableCities", null, "[]"));
+
+    /*=== SETTINGS ===*/
+    if (!empty($availableCities) && !isset($params->filter->indexAll)) {
+      if (!isset($params->permissions['ilocations.cities.manage']) || (!$params->permissions['ilocations.cities.manage'])) {
+      
+        $query->whereIn('id', $availableCities);
+      
+      }
+    }
+
     
     /*== FIELDS ==*/
     if (isset($params->fields) && count($params->fields))
@@ -115,7 +128,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     if (isset($params->page) && $params->page) {
       return $query->paginate($params->take);
     } else {
-      $params->take ? $query->take($params->take) : false;//Take
+      isset($params->take) && $params->take ? $query->take($params->take) : false;//Take
       return $query->get();
     }
   }
