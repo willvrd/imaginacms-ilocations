@@ -74,21 +74,31 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
         /*== FILTERS ==*/
         if (isset($params->filter)) {
             $filter = $params->filter;//Short filter
+
+            //add filter by search
+            if (isset($filter->search)) {
+              //find search in columns
+              $query->where(function ($query) use ($filter) {
+                $query->whereHas('translations', function ($q) use ($filter) {
+                  $q->where('name', 'like', '%' . $filter->search . '%');
+                })->orWhere('id', 'like', '%' . $filter->search . '%');
+              });
+            }
           /**
            * @deprecated Use $filter->countryId
            */
             if (isset($filter->country)) {
                 $query->where("country_id", $filter->country);
             }
-            
+
             if (isset($filter->countryId)) {
                 $query->where("country_id", $filter->countryId);
             }
-            
+
             if (isset($filter->iso2)) {
                 $query->where("iso_2", $filter->iso2);
             }
-            
+
             if (isset($filter->countryCode)) {
                 $code=$filter->countryCode;
                 $query->whereHas("country", function ($q) use ($code) {
@@ -112,19 +122,19 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
                 $query->orderBy($orderByField, $orderWay);//Add order to query
             }
         }
-  
-  
+
+
       $availableProvinces = json_decode(setting("ilocations::availableProvinces", null, "[]"));
 
       /*=== SETTINGS ===*/
       if (!empty($availableProvinces) && !isset($params->filter->indexAll)) {
         if (!isset($params->permissions['ilocations.provinces.manage']) || (!$params->permissions['ilocations.provinces.manage'])) {
-      
+
           $query->whereIn('iso_2', $availableProvinces);
-      
+
         }
       }
- 
+
         /*== FIELDS ==*/
         if (isset($params->fields) && count($params->fields))
             $query->select($params->fields);
