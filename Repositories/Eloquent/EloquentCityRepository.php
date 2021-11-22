@@ -112,14 +112,37 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
       }
     }
   
+    $availableCountries = json_decode(setting("ilocations::availableCountries", null, "[]"));
+    /*=== SETTINGS ===*/
+    if (!empty($availableCountries) && !isset($params->filter->indexAll)) {
+      if (!isset($params->permissions['ilocations.cities.manage']) || (!$params->permissions['ilocations.cities.manage'])) {
+        $query->whereHas("country", function ($query) use ($availableCountries){
+          $query->whereIn("ilocations__countries.iso_2",$availableCountries);
+        });
+      
+      }
+    }
   
+    $availableProvinces = json_decode(setting("ilocations::availableProvinces", null, "[]"));
+  
+    /*=== SETTINGS ===*/
+    if (!empty($availableProvinces) && !isset($params->filter->indexAll)) {
+      if (!isset($params->permissions['ilocations.cities.manage']) || (!$params->permissions['ilocations.cities.manage'])) {
+        $query->whereHas("province", function ($query) use ($availableProvinces){
+          $query->whereIn("ilocations__provinces.iso_2",$availableProvinces);
+        });
+    
+      }
+    }
+    
+    
     $availableCities = json_decode(setting("ilocations::availableCities", null, "[]"));
 
     /*=== SETTINGS ===*/
     if (!empty($availableCities) && !isset($params->filter->indexAll)) {
       if (!isset($params->permissions['ilocations.cities.manage']) || (!$params->permissions['ilocations.cities.manage'])) {
       
-        $query->whereIn('id', $availableCities);
+        $query->whereIn('ilocations__cities.id', $availableCities);
       
       }
     }

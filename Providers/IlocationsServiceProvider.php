@@ -43,8 +43,8 @@ class IlocationsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->publishConfig('ilocations', 'permissions');
         $this->publishConfig('ilocations', 'config');
+      $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'permissions'), "asgard.ilocations.permissions");
       $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'settings'), "asgard.ilocations.settings");
       $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'settings-fields'), "asgard.ilocations.settings-fields");
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
