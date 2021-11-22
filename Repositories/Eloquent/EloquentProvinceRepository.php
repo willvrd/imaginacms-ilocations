@@ -3,7 +3,6 @@
 namespace Modules\Ilocations\Repositories\Eloquent;
 
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
-use Modules\Ilocations\Entities\Country;
 use Modules\Ilocations\Repositories\ProvinceRepository;
 
 class EloquentProvinceRepository extends EloquentBaseRepository implements ProvinceRepository
@@ -124,8 +123,8 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
                 ->orWhere('created_at', 'like', '%' . $filter->search . '%');
             });
     
-          }
-          
+        }
+
         }
   
   
@@ -139,18 +138,18 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
       
         }
       }
-  
+
       $availableProvinces = json_decode(setting("ilocations::availableProvinces", null, "[]"));
 
       /*=== SETTINGS ===*/
       if (!empty($availableProvinces) && !isset($params->filter->indexAll)) {
         if (!isset($params->permissions['ilocations.provinces.manage']) || (!$params->permissions['ilocations.provinces.manage'])) {
-      
+
           $query->whereIn('ilocations__provinces.iso_2', $availableProvinces);
-      
+
         }
       }
- 
+
         /*== FIELDS ==*/
         if (isset($params->fields) && count($params->fields))
             $query->select($params->fields);
