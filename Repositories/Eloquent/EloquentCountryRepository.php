@@ -126,7 +126,10 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
             $filter = $params->filter;//Short filter
 
             if(isset($filter->iso2)){
-              $query->where('iso_2',$filter->iso2);
+              if(is_array($filter->iso2))
+                $query->whereIn('iso_2',$filter->iso2);
+              else
+                $query->where('iso_2',$filter->iso2);
             }
             
               if (isset($filter->search)) {
