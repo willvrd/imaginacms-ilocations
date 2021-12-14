@@ -14,6 +14,8 @@ return [
     'validation' => [
     ],
   'settings' => [
-    'availableCountries' => 'Available Countries'
+    'availableCountries' => 'Available Countries',
+    'availableProvinces' => 'Available Provinces',
+    'availableCities' => 'Available Cities',
   ],
 ];
