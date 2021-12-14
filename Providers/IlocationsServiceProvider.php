@@ -135,7 +135,20 @@ class IlocationsServiceProvider extends ServiceProvider
           return new \Modules\Ilocations\Repositories\Cache\CacheNeighborhoodDecorator($repository);
         }
       );
+        $this->app->bind(
+            'Modules\Ilocations\Repositories\LocalityRepository',
+            function () {
+                $repository = new \Modules\Ilocations\Repositories\Eloquent\EloquentLocalityRepository(new \Modules\Ilocations\Entities\Locality());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Ilocations\Repositories\Cache\CacheLocalityDecorator($repository);
+            }
+        );
 // add bindings
+
 
 
 
