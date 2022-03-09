@@ -59,7 +59,7 @@ return [
       "authenticated" => true,
       "subHeader" => [
         "breadcrumb" => [
-          "qlocations.cities"
+          "ilocations_cms_admin_cities"
         ]
       ]
     ],
@@ -76,7 +76,7 @@ return [
       "subHeader" => [
         "refresh" => true,
         "breadcrumb" => [
-          "qlocations.cities"
+          "ilocations_cms_admin_cities"
         ]
       ]
     ],
@@ -107,7 +107,7 @@ return [
       "authenticated" => true,
       "subHeader" => [
         "breadcrumb" => [
-          "qlocations.polygons"
+          "ilocations_cms_admin_polygons"
         ]
       ]
     ],
@@ -124,7 +124,7 @@ return [
       "subHeader" => [
         "refresh" => true,
         "breadcrumb" => [
-          "qlocations.polygons"
+          "ilocations_cms_admin_polygons"
         ]
       ]
     ],
@@ -155,7 +155,7 @@ return [
       "authenticated" => true,
       "subHeader" => [
         "breadcrumb" => [
-          "qlocations.geozones"
+          "ilocations_cms_admin_geozones"
         ]
       ]
     ],
@@ -172,7 +172,7 @@ return [
       "subHeader" => [
         "refresh" => true,
         "breadcrumb" => [
-          "qlocations.geozones"
+          "ilocations_cms_admin_geozones"
         ]
       ]
     ],
@@ -203,7 +203,7 @@ return [
       "authenticated" => true,
       "subHeader" => [
         "breadcrumb" => [
-          "qlocations.neighborhoods"
+          "ilocations_cms_admin_neighborhoods"
         ]
       ]
     ],
@@ -220,7 +220,7 @@ return [
       "subHeader" => [
         "refresh" => true,
         "breadcrumb" => [
-          "qlocations.neighborhoods"
+          "ilocations_cms_admin_neighborhoods"
         ]
       ]
     ]
