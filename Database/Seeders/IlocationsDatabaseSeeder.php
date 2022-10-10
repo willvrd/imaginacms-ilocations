@@ -31,6 +31,7 @@ class IlocationsDatabaseSeeder extends Seeder
 
     \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
+    $this->call(IlocationsModuleTableSeeder::class);
     $this->call(CountryTableSeeder::class);
     $this->call(ProvinceTableSeeder::class);
     $this->call(CityTableSeeder::class);
