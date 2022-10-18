@@ -14,7 +14,6 @@ return [
     'loadOptions' => [
       'apiRoute' => 'apiRoutes.qlocations.countries', //apiRoute to request
       'select' => ['label' => 'name', 'id' => 'iso2'], //Define fields to config select
-      'filterByQuery' => true,
       'requestParams' => [
         "filter" => [
           "indexAll" => true
@@ -56,7 +55,6 @@ return [
     'loadOptions' => [
       'apiRoute' => 'apiRoutes.qlocations.cities', //apiRoute to request
       'select' => ['label' => 'name', 'id' => 'id'], //Define fields to config select
-      'filterByQuery' => true,
       'requestParams' => [
         "filter" => [
           "indexAll" => true
