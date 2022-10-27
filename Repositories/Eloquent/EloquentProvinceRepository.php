@@ -114,11 +114,12 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
 
       //New filter by search
       if (isset($filter->search)) {
-        //find search in columns
+
         $query->where(function ($query) use ($filter) {
-          $query->whereHas('translations', function ($q) use ($filter) {
-            $q->where('name', 'like', '%' . $filter->search . '%');
-          })->orWhere('id', 'like', '%' . $filter->search . '%');
+          $query->whereRaw("ilocations__provinces.id IN (SELECT ipt.province_id FROM ilocations__province_translations AS ipt WHERE ipt.locale = '$filter->locale' AND ipt.name LIKE '%$filter->search%')")
+            ->orWhere('ilocations__provinces.id', 'like', '%' . $filter->search . '%')
+            ->orWhere('updated_at', 'like', '%' . $filter->search . '%')
+            ->orWhere('created_at', 'like', '%' . $filter->search . '%');
         });
       }
     }
@@ -149,7 +150,7 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
     if (isset($params->fields) && count($params->fields))
       $query->select($params->fields);
 
-    //dd($query->toSql(),$query->getBindings());
+   // dd($query->toSql(),$query->getBindings());
     /*== REQUEST ==*/
     if (isset($params->page) && $params->page) {
       return $query->paginate($params->take);
