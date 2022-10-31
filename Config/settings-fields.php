@@ -55,6 +55,7 @@ return [
     'loadOptions' => [
       'apiRoute' => 'apiRoutes.qlocations.cities', //apiRoute to request
       'select' => ['label' => 'name', 'id' => 'id'], //Define fields to config select
+      'filterByQuery' => true,
       'requestParams' => [
         "filter" => [
           "indexAll" => true
