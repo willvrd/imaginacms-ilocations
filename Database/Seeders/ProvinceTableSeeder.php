@@ -26,12 +26,16 @@ class ProvinceTableSeeder extends Seeder
 
         foreach ($countries as $keyCountry => $country)
             foreach ($provinces as $keyProvince => $province)
-                if($country->iso_2 == $province['country'])
+                if($country->iso_2 == $province['country']){
+                  $currentProvince = Province::where("iso_2",$province["iso_2"])->first();
+                  if(!isset($currentProvince->id))
                     Province::create([
-                        'name' => $province['region'],
-                        'iso_2' => $province['iso_2'],
-                        'country_id' => $country->id
+                      'name' => $province['region'],
+                      'iso_2' => $province['iso_2'],
+                      'country_id' => $country->id
                     ]);
+                }
+                
 
     }
 }

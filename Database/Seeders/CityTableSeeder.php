@@ -23,7 +23,9 @@ class CityTableSeeder extends Seeder
     $path = base_path('/Modules/Ilocations/Assets/js/citiesCO.json');
     $cities = json_decode(file_get_contents($path), true);
 
-    foreach ($cities as $key => $city)
-      City::create($city);
+    foreach ($cities as $key => $city){
+      $currentCity = City::find("code",$city['code'])->first();
+      if(!isset($currentCity->id)) City::create($city);
+    }
   }
 }
