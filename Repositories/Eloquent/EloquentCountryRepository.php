@@ -153,12 +153,21 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
               if (isset($date->to))//to a date
                 $query->whereDate($date->field, '<=', $date->to);
             }
-
-            //Order by
-            if (isset($filter->order)) {
-              $orderByField = $filter->order->field ?? 'created_at';//Default field
-              $orderWay = $filter->order->way ?? 'desc';//Default way
-              $query->orderBy($orderByField, $orderWay);//Add order to query
+  
+            // ORDER
+            if (isset($filter->order) && $filter->order) {
+    
+              $order = is_array($filter->order) ? $filter->order : [$filter->order];
+    
+              foreach ($order as $orderObject) {
+                if (isset($orderObject->field) && isset($orderObject->way)) {
+                  if (in_array($orderObject->field, $this->model->translatedAttributes)) {
+                    $query->orderByTranslation($orderObject->field, $orderObject->way);
+                  } else
+                    $query->orderBy($orderObject->field, $orderObject->way);
+                }
+      
+              }
             }
           }
 
@@ -177,6 +186,7 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
             $query->select($params->fields);
 
           /*== REQUEST ==*/
+          //dd($query->toSql(),$query->getBindings(),$params);
           if (isset($params->page) && $params->page) {
             return $query->paginate($params->take);
           } else {
