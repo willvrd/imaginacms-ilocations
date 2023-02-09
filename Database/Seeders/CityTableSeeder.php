@@ -24,9 +24,11 @@ class CityTableSeeder extends Seeder
     $provinces = Province::get();
     $pathCO = base_path('/Modules/Ilocations/Assets/js/citiesCO.json');
     $pathUS = base_path('/Modules/Ilocations/Assets/js/citiesUS.json');
+    $pathMX = base_path('/Modules/Ilocations/Assets/js/citiesMX.json');
     $citiesCO = json_decode(file_get_contents($pathCO), true);
     $citiesUS = json_decode(file_get_contents($pathUS), true);
-    $cities = array_merge($citiesCO, $citiesUS);
+    $citiesMX = json_decode(file_get_contents($pathMX), true);
+    $cities = array_merge($citiesCO, $citiesUS, $citiesMX);
 
     foreach ($cities as $key => $city) {
       $currentCity = City::where("code", $city['code'])->first();
