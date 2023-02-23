@@ -62,5 +62,25 @@ return [
         ]
       ]
     ]
-  ]
+  ],
+  'countriesToSeedCities' => [
+    'value' => ['citiesCO'],
+    'name' => 'ilocations::countriesToSeedCities',
+    "onlySuperAdmin" => true,
+    'type' => 'select',
+    'columns' => 'col-6',
+    'props' => [
+      'label' => 'ilocations::common.settings.countriesToSeedCities',
+      'useInput' => false,
+      'useChips' => true,
+      'multiple' => true,
+      'hideDropdownIcon' => true,
+      'newValueMode' => 'add-unique',
+      'options' => [
+        ['label' => 'Colombia', 'value' => 'citiesCO'],
+        ['label' => 'United States', 'value' => 'citiesUS'],
+        ['label' => 'Mexico', 'value' => 'citiesMX'],
+      ]
+    ]
+  ],
 ];

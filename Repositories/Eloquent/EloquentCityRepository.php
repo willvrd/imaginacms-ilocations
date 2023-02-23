@@ -64,7 +64,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
 
     /*== RELATIONSHIPS ==*/
     if (in_array('*', $params->include ?? [])) {//If Request all relationships
-      $query->with(['province', 'country']);
+      $query->with(['province', 'country','translations']);
     } else {//Especific relationships
       $includeDefault = [];//Default relationships
       if (isset($params->include))//merge relations with default relationships
@@ -165,7 +165,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
 
       }
     }
-
+  
 
     /*== FIELDS ==*/
     if (isset($params->fields) && count($params->fields))
@@ -187,7 +187,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     
     /*== RELATIONSHIPS ==*/
     if (in_array('*', $params->include)) {//If Request all relationships
-      $query->with(['province', 'country']);
+      $query->with(['province', 'country','translations']);
     } else {//Especific relationships
       $includeDefault = [];//Default relationships
       if (isset($params->include))//merge relations with default relationships

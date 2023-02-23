@@ -25,13 +25,20 @@ class CityTableSeeder extends Seeder
     $pathCO = base_path('/Modules/Ilocations/Assets/js/citiesCO.json');
     $pathUS = base_path('/Modules/Ilocations/Assets/js/citiesUS.json');
     $pathMX = base_path('/Modules/Ilocations/Assets/js/citiesMX.json');
-    $citiesCO = json_decode(file_get_contents($pathCO), true);
-    $citiesUS = json_decode(file_get_contents($pathUS), true);
-    $citiesMX = json_decode(file_get_contents($pathMX), true);
-    $cities = array_merge($citiesCO, $citiesUS, $citiesMX);
+    $cities = [];
+    $countriesToSeedCities = json_decode(setting('ilocations::countriesToSeedCities',null,'["citiesCO"]'));
 
+    foreach ($countriesToSeedCities as $citiesJsonName){
+      $path = base_path("/Modules/Ilocations/Assets/js/$citiesJsonName.json");
+      $citiesJson = json_decode(file_get_contents($path), true);
+      $cities = array_merge($cities, $citiesJson);
+    }
+    
+    $currentCities = City::all();
+
+    $citiesToCreate = [];
     foreach ($cities as $key => $city) {
-      $currentCity = City::where("code", $city['code'])->first();
+      $currentCity = $currentCities->where("code", $city['code'])->first();
       if (!isset($currentCity->id)) {
         $countryCity = $countries->where("iso_2", $city['country_iso_2'])->first();
         $provinceCity = $provinces->where("iso_2", $city['province_iso_2'])->first();
@@ -42,5 +49,7 @@ class CityTableSeeder extends Seeder
         City::create($city);
       }
     }
+    
+    
   }
 }
