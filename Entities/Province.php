@@ -46,7 +46,8 @@ class Province extends Model
     if (empty($currentTranslations) || empty($currentTranslations->toArray()["name"])) {
       
       $model = $this->getTranslation(\LaravelLocalization::getDefaultLocale());
-      
+  
+      if(empty($model)) return "";
       return $model->toArray()["name"] ?? "";
     }
     
