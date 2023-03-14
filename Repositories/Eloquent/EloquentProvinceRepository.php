@@ -17,6 +17,10 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
 
     /*== FILTER ==*/
     if ($filter) {
+      //filter by Id
+      if (isset($filter->id)) {
+        $query->whereIn('id', (array)$filter->id);
+      }
       /**
        * @deprecated use $filter->country instead
        */
@@ -104,12 +108,12 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
         if (isset($date->to))//to a date
           $query->whereDate($date->field, '<=', $date->to);
       }
-  
+
       // ORDER
       if (isset($filter->order) && $filter->order) {
-    
+
         $order = is_array($filter->order) ? $filter->order : [$filter->order];
-    
+
         foreach ($order as $orderObject) {
           if (isset($orderObject->field) && isset($orderObject->way)) {
             if (in_array($orderObject->field, $this->model->translatedAttributes)) {
@@ -117,7 +121,7 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
             } else
               $query->orderBy($orderObject->field, $orderObject->way);
           }
-      
+
         }
       }
 

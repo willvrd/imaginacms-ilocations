@@ -7,10 +7,10 @@ use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 
 class EloquentCountryRepository extends EloquentBaseRepository implements CountryRepository
 {
-  
+
   public function index($page, $take, $filter, $include, $fields)
   {
-    
+
     //Initialize Query
     $query = $this->model->query();
     $query->with('translations');
@@ -34,42 +34,42 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
             });
         }
     }
-    
+
     /*== RELATIONSHIPS ==*/
     if (count($include)) {
       //Include relationships for default
       $includeDefault = [];
-    
+
       $query->with(array_merge($includeDefault, $include));
     }
-  
+
     /*== FIELDS ==*/
 
       $defaultFields = ["id"];
-    
+
       /*filter by user*/
       $query->select(array_merge($defaultFields, $fields));
-    
 
-  
+
+
     //Return request with pagination
     if ($page) {
       $take ? true : $take = 12; //If no specific take, query take 12 for default
-      
+
       return $query->paginate($take);
     }
-    
+
     //Return request without pagination
     if (!$page) {
       $take ? $query->take($take) : false; //if request to take a limit
-      
+
       return $query->get()->sortBy('name');
-      
+
     }
-    
-    
+
+
   }
-  
+
   public function findByIso2($iso2){
     return $this->model->where('iso_2',$iso2)->first();
   }
@@ -125,13 +125,18 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
           if (isset($params->filter)) {
             $filter = $params->filter;//Short filter
 
+            //filter by Id
+            if (isset($filter->id)) {
+              $query->whereIn('id', (array)$filter->id);
+            }
+
             if(isset($filter->iso2)){
               if(is_array($filter->iso2))
                 $query->whereIn('iso_2',$filter->iso2);
               else
                 $query->where('iso_2',$filter->iso2);
             }
-            
+
               if (isset($filter->search)) {
                 $query->where(function ($query) use ($filter) {
                   $query->whereHas('translations', function ($query) use ($filter) {
@@ -142,7 +147,7 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
                     ->orWhere('updated_at', 'like', '%' . $filter->search . '%')
                     ->orWhere('created_at', 'like', '%' . $filter->search . '%');
                 });
-              
+
               }
             //Filter by date
             if (isset($filter->date)) {
@@ -153,12 +158,12 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
               if (isset($date->to))//to a date
                 $query->whereDate($date->field, '<=', $date->to);
             }
-  
+
             // ORDER
             if (isset($filter->order) && $filter->order) {
-    
+
               $order = is_array($filter->order) ? $filter->order : [$filter->order];
-    
+
               foreach ($order as $orderObject) {
                 if (isset($orderObject->field) && isset($orderObject->way)) {
                   if (in_array($orderObject->field, $this->model->translatedAttributes)) {
@@ -166,7 +171,7 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
                   } else
                     $query->orderBy($orderObject->field, $orderObject->way);
                 }
-      
+
               }
             }
           }
@@ -175,9 +180,9 @@ class EloquentCountryRepository extends EloquentBaseRepository implements Countr
           /*=== SETTINGS ===*/
           if (!empty($availableCountries) && !isset($params->filter->indexAll)) {
             if (!isset($params->permissions['ilocations.countries.manage']) || (!$params->permissions['ilocations.countries.manage'])) {
-             
+
               $query->whereIn('iso_2', $availableCountries);
-      
+
             }
           }
 

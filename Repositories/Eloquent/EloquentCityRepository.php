@@ -76,6 +76,11 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     if (isset($params->filter)) {
       $filter = $params->filter;//Short filter
 
+      //filter by Id
+      if (isset($filter->id)) {
+        $query->whereIn('id', (array)$filter->id);
+      }
+
       //add filter by search
       if (isset($filter->search)) {
         //find search in columns
@@ -113,12 +118,12 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
         if (isset($date->to))//to a date
           $query->whereDate($date->field, '<=', $date->to);
       }
-  
+
       // ORDER
       if (isset($filter->order) && $filter->order) {
-    
+
         $order = is_array($filter->order) ? $filter->order : [$filter->order];
-    
+
         foreach ($order as $orderObject) {
           if (isset($orderObject->field) && isset($orderObject->way)) {
             if (in_array($orderObject->field, $this->model->translatedAttributes)) {
@@ -126,7 +131,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
             } else
               $query->orderBy($orderObject->field, $orderObject->way);
           }
-      
+
         }
       }
     }
@@ -138,22 +143,22 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
         $query->whereHas("country", function ($query) use ($availableCountries){
           $query->whereIn("ilocations__countries.iso_2",$availableCountries);
         });
-      
+
       }
     }
-  
+
     $availableProvinces = json_decode(setting("ilocations::availableProvinces", null, "[]"));
-  
+
     /*=== SETTINGS ===*/
     if (!empty($availableProvinces) && !isset($params->filter->indexAll)) {
       if (!isset($params->permissions['ilocations.cities.manage']) || (!$params->permissions['ilocations.cities.manage'])) {
         $query->whereHas("province", function ($query) use ($availableProvinces){
           $query->whereIn("ilocations__provinces.iso_2",$availableProvinces);
         });
-    
+
       }
     }
-    
+
 
     $availableCities = json_decode(setting("ilocations::availableCities", null, "[]"));
 
@@ -165,7 +170,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
 
       }
     }
-  
+
 
     /*== FIELDS ==*/
     if (isset($params->fields) && count($params->fields))
@@ -184,7 +189,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
   {
     //Initialize query
     $query = $this->model->query();
-    
+
     /*== RELATIONSHIPS ==*/
     if (in_array('*', $params->include)) {//If Request all relationships
       $query->with(['province', 'country','translations']);
@@ -194,27 +199,27 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
         $includeDefault = array_merge($includeDefault, $params->include);
       $query->with($includeDefault);//Add Relationships to query
     }
-    
+
     /*== FILTER ==*/
     if (isset($params->filter)) {
       $filter = $params->filter;
-      
+
       if (isset($filter->field))//Filter by specific field
         $field = $filter->field;
     }
-    
+
     /*== FIELDS ==*/
     if (isset($params->fields) && count($params->fields))
       $query->select($params->fields);
-    
+
     /*== REQUEST ==*/
     return $query->where($field ?? 'id', $criteria)->first();
   }
-  
+
   public function whereByCountry($id)
   {
-    
+
     return $this->model->where('country_id', $id)->get();
   }
-  
+
 }
