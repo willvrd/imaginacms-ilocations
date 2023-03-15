@@ -17,10 +17,6 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
 
     /*== FILTER ==*/
     if ($filter) {
-      //filter by Id
-      if (isset($filter->id)) {
-        $query->whereIn('id', (array)$filter->id);
-      }
       /**
        * @deprecated use $filter->country instead
        */
@@ -78,6 +74,11 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
     /*== FILTERS ==*/
     if (isset($params->filter)) {
       $filter = $params->filter;//Short filter
+
+      if (isset($filter->id)) {
+        $query->whereIn('id', (array)$filter->id);
+      }
+
       /**
        * @deprecated Use $filter->countryId
        */
@@ -90,7 +91,7 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
       }
 
       if (isset($filter->iso2)) {
-        $query->where("iso_2", $filter->iso2);
+        $query->whereIn("iso_2", (array)$filter->iso2);
       }
 
       if (isset($filter->countryCode)) {
@@ -163,7 +164,7 @@ class EloquentProvinceRepository extends EloquentBaseRepository implements Provi
     if (isset($params->fields) && count($params->fields))
       $query->select($params->fields);
 
-   // dd($query->toSql(),$query->getBindings());
+    // dd($query->toSql(),$query->getBindings());
     /*== REQUEST ==*/
     if (isset($params->page) && $params->page) {
       return $query->paginate($params->take);
