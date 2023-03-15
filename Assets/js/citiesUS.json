@@ -6640,5 +6640,887 @@
     "province_iso_2": "US-WY",
     "code": "82070",
     "name": "Laramie"
+  },
+  "1119": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-AS",
+    "code": "96799",
+    "name": "Pago Pago"
+  },
+  "1120": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-DC",
+    "code": "20001",
+    "name": "Washington"
+  },
+  "1121": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-DC",
+    "code": "20373",
+    "name": "Naval Anacost Annex"
+  },
+  "1122": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-DC",
+    "code": "20374",
+    "name": "Washington Navy Yard"
+  },
+  "1123": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-DC",
+    "code": "56901",
+    "name": "Parcel Return Service"
+  },
+  "1124": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-FM",
+    "code": "96941",
+    "name": "Pohnpei"
+  },
+  "1125": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-FM",
+    "code": "96942",
+    "name": "Chuuk"
+  },
+  "1126": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-FM",
+    "code": "96943",
+    "name": "Yap"
+  },
+  "1127": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-FM",
+    "code": "96944",
+    "name": "Kosae"
+  },
+  "1128": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96910",
+    "name": "Hagatna"
+  },
+  "1129": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96912",
+    "name": "Dededo"
+  },
+  "1130": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96913",
+    "name": "Harmon"
+  },
+  "1131": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96915",
+    "name": "Santa Rita"
+  },
+  "1132": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96916",
+    "name": "Merizo"
+  },
+  "1133": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96917",
+    "name": "Inarajan"
+  },
+  "1134": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96919",
+    "name": "Agana Heights"
+  },
+  "1135": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96921",
+    "name": "Barrigada"
+  },
+  "1136": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96923",
+    "name": "Mangilao"
+  },
+  "1137": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96928",
+    "name": "Agat"
+  },
+  "1138": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96929",
+    "name": "Yigo"
+  },
+  "1139": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96931",
+    "name": "Tamuning"
+  },
+  "1140": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-GU",
+    "code": "96932",
+    "name": "Hagatna"
+  },
+  "1141": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-MH",
+    "code": "96960",
+    "name": "Majuro"
+  },
+  "1142": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-MH",
+    "code": "96970",
+    "name": "Ebeye"
+  },
+  "1143": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-MP",
+    "code": "96951",
+    "name": "Rota"
+  },
+  "1144": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-MP",
+    "code": "96950",
+    "name": "Saipan"
+  },
+  "1145": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-MP",
+    "code": "96952",
+    "name": "Tinian"
+  },
+  "1146": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PW",
+    "code": "96939",
+    "name": "Ngerulmud"
+  },
+  "1147": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PW",
+    "code": "96940",
+    "name": "Koror"
+  },
+  "1148": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00601",
+    "name": "Adjuntas"
+  },
+  "1149": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00602",
+    "name": "Aguada"
+  },
+  "1150": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00603",
+    "name": "Bda Caban"
+  },
+  "1151": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00604",
+    "name": "Ramey"
+  },
+  "1152": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00605",
+    "name": "Aguadilla"
+  },
+  "1153": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00606",
+    "name": "Maricao"
+  },
+  "1154": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00610",
+    "name": "Anasco"
+  },
+  "1155": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00611",
+    "name": "Angeles"
+  },
+  "1156": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00612",
+    "name": "Alt De Juncos"
+  },
+  "1157": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00613",
+    "name": "Arecibo"
+  },
+  "1158": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00616",
+    "name": "Bajadero"
+  },
+  "1159": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00617",
+    "name": "Barceloneta"
+  },
+  "1160": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00622",
+    "name": "Boqueron"
+  },
+  "1161": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00623",
+    "name": "Cabo Rojo"
+  },
+  "1162": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00624",
+    "name": "Penuelas"
+  },
+  "1163": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00627",
+    "name": "Camuy"
+  },
+  "1164": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00631",
+    "name": "Castaner"
+  },
+  "1165": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00636",
+    "name": "Rosario"
+  },
+  "1166": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00637",
+    "name": "Sabana Grande"
+  },
+  "1167": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00638",
+    "name": "Ciales"
+  },
+  "1168": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00641",
+    "name": "Utuado"
+  },
+  "1169": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00646",
+    "name": "Dorado"
+  },
+  "1170": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00647",
+    "name": "Ensenada"
+  },
+  "1171": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00650",
+    "name": "Florida"
+  },
+  "1172": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00652",
+    "name": "Garrochales"
+  },
+  "1173": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00653",
+    "name": "Guanica"
+  },
+  "1174": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00656",
+    "name": "Guayanilla"
+  },
+  "1175": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00659",
+    "name": "Hatillo"
+  },
+  "1176": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00660",
+    "name": "Hormigueros"
+  },
+  "1177": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00662",
+    "name": "Isabela"
+  },
+  "1178": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00664",
+    "name": "Jayuya"
+  },
+  "1179": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00667",
+    "name": "Lajas"
+  },
+  "1180": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00669",
+    "name": "Lares"
+  },
+  "1181": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00670",
+    "name": "Las Marias"
+  },
+  "1182": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00674",
+    "name": "Manati"
+  },
+  "1183": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00676",
+    "name": "Moca"
+  },
+  "1184": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00677",
+    "name": "Rincon"
+  },
+  "1185": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00678",
+    "name": "Quebradillas"
+  },
+  "1186": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00680",
+    "name": "Mayaguez"
+  },
+  "1187": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00683",
+    "name": "San German"
+  },
+  "1188": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00685",
+    "name": "San Sebastian"
+  },
+  "1189": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00687",
+    "name": "Morovis"
+  },
+  "1190": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00688",
+    "name": "Sabana Hoyos"
+  },
+  "1191": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00690",
+    "name": "San Antonio"
+  },
+  "1192": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00692",
+    "name": "Vega Alta"
+  },
+  "1193": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00693",
+    "name": "Vega Baja"
+  },
+  "1194": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00698",
+    "name": "Yauco"
+  },
+  "1195": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00703",
+    "name": "Aguas Buenas"
+  },
+  "1196": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00704",
+    "name": "Aguirre"
+  },
+  "1197": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00705",
+    "name": "Aibonito"
+  },
+  "1198": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00707",
+    "name": "Maunabo"
+  },
+  "1199": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00714",
+    "name": "Arroyo"
+  },
+  "1200": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00715",
+    "name": "Mercedita"
+  },
+  "1201": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00716",
+    "name": "Ponce"
+  },
+  "1202": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00718",
+    "name": "Naguabo"
+  },
+  "1203": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00719",
+    "name": "Naranjito"
+  },
+  "1204": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00720",
+    "name": "Orocovis"
+  },
+  "1205": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00721",
+    "name": "Palmer"
+  },
+  "1206": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00723",
+    "name": "Patillas"
+  },
+  "1207": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00725",
+    "name": "Caguas"
+  },
+  "1208": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00728",
+    "name": "Ponce"
+  },
+  "1209": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00729",
+    "name": "Canovanas"
+  },
+  "1210": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00735",
+    "name": "Ceiba"
+  },
+  "1211": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00736",
+    "name": "Cayey"
+  },
+  "1212": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00738",
+    "name": "Fajardo"
+  },
+  "1213": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00739",
+    "name": "Cidra"
+  },
+  "1214": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00740",
+    "name": "Puerto Real"
+  },
+  "1215": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00741",
+    "name": "Punta Santiago"
+  },
+  "1216": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00742",
+    "name": "Roosevelt Roads"
+  },
+  "1217": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00744",
+    "name": "Rio Blanco"
+  },
+  "1218": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00745",
+    "name": "Rio Grande"
+  },
+  "1219": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00751",
+    "name": "Salinas"
+  },
+  "1220": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00754",
+    "name": "San Lorenzo"
+  },
+  "1221": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00757",
+    "name": "Santa Isabel"
+  },
+  "1222": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00765",
+    "name": "Vieques"
+  },
+  "1223": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00766",
+    "name": "Villalba"
+  },
+  "1224": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00767",
+    "name": "Yabucoa"
+  },
+  "1225": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00769",
+    "name": "Coamo"
+  },
+  "1226": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00771",
+    "name": "Las Piedras"
+  },
+  "1227": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00772",
+    "name": "Loiza"
+  },
+  "1228": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00773",
+    "name": "Luquillo"
+  },
+  "1229": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00775",
+    "name": "Culebra"
+  },
+  "1230": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00777",
+    "name": "Juncos"
+  },
+  "1231": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00778",
+    "name": "Gurabo"
+  },
+  "1232": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00780",
+    "name": "Coto Laurel"
+  },
+  "1233": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00782",
+    "name": "Comerio"
+  },
+  "1234": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00783",
+    "name": "Corozal"
+  },
+  "1235": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00784",
+    "name": "Guayama"
+  },
+  "1236": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00786",
+    "name": "La Plata"
+  },
+  "1237": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00791",
+    "name": "Humacao"
+  },
+  "1238": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00794",
+    "name": "Barranquitas"
+  },
+  "1239": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00795",
+    "name": "Juana Diaz"
+  },
+  "1240": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00901",
+    "name": "San Juan"
+  },
+  "1241": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00926",
+    "name": "Cupey"
+  },
+  "1242": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00934",
+    "name": "Fort Buchanan"
+  },
+  "1243": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00949",
+    "name": "Toa Baja"
+  },
+  "1244": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00952",
+    "name": "Sabana Seca"
+  },
+  "1245": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00953",
+    "name": "Toa Alta"
+  },
+  "1246": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00956",
+    "name": "Bayamon"
+  },
+  "1247": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00962",
+    "name": "CATANO"
+  },
+  "1248": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00965",
+    "name": "Guaynabo"
+  },
+  "1249": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00976",
+    "name": "Trujillo Alto"
+  },
+  "1250": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00978",
+    "name": "Saint Just"
+  },
+  "1251": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-PR",
+    "code": "00979",
+    "name": "Carolina"
+  },
+  "1252": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-VI",
+    "code": "00801",
+    "name": "St Thomas"
+  },
+  "1253": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-VI",
+    "code": "00820",
+    "name": "Christiansted"
+  },
+  "1254": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-VI",
+    "code": "00830",
+    "name": "St John"
+  },
+  "1255": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-VI",
+    "code": "00840",
+    "name": "Frederiksted"
+  },
+  "1256": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-VI",
+    "code": "00850",
+    "name": "Kingshill"
+  },
+  "1257": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74300",
+    "name": "Midway Atoll"
+  },
+  "1258": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74450",
+    "name": "Wake Island"
+  },
+  "1259": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74200",
+    "name": "Johnston Atoll"
+  },
+  "1260": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74250",
+    "name": "Kingman Reef"
+  },
+  "1261": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74400",
+    "name": "Palmyra Atoll"
+  },
+  "1262": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74100",
+    "name": "Howland Island"
+  },
+  "1263": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74050",
+    "name": "Baker Island"
+  },
+  "1264": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74150",
+    "name": "Jarvis Island"
+  },
+  "1265": {
+    "country_iso_2": "US",
+    "province_iso_2": "US-UM",
+    "code": "74350",
+    "name": "Navassa Island"
   }
 }
