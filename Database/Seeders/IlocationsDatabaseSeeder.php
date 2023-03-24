@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use Modules\Ilocations\Jobs\ProcessLocations;
+
 class IlocationsDatabaseSeeder extends Seeder
 {
   /**
@@ -16,11 +18,7 @@ class IlocationsDatabaseSeeder extends Seeder
   public function run()
   {
 
-    $this->call(IlocationsModuleTableSeeder::class);
-    $this->call(CountryTableSeeder::class);
-    $this->call(ProvinceTableSeeder::class);
-    $this->call(CityTableSeeder::class);
-    $this->call(GeozoneTableSeeder::class);
-    
+    ProcessLocations::dispatch();
+
   }
 }
