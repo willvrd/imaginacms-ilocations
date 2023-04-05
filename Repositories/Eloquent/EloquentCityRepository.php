@@ -66,7 +66,7 @@ class EloquentCityRepository extends EloquentBaseRepository implements CityRepos
     if (in_array('*', $params->include ?? [])) {//If Request all relationships
       $query->with(['province', 'country','translations']);
     } else {//Especific relationships
-      $includeDefault = ['province', 'country','translations'];//Default relationships
+      $includeDefault = ['translations'];//Default relationships
       if (isset($params->include))//merge relations with default relationships
         $includeDefault = array_merge($includeDefault, $params->include);
       $query->with($includeDefault);//Add Relationships to query
