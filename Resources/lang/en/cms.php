@@ -56,7 +56,7 @@ return [
     "countryCode" => "Country Code",
     "iso2" => "ISO Code 2",
     "iso3" => "ISO Code 3",
-    "code" => "Code",
+    "code" => ">Zip Code",
     "points" => "Points",
     "geozone" => "Geo zone"
   ],
