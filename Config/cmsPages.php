@@ -1,7 +1,7 @@
 <?php
 
 return [
-  'admin' => [
+    'admin' => [
     "countries" => [
       "permission" => "ilocations.countries.manage",
       "activated" => true,
@@ -16,7 +16,7 @@ return [
       "subHeader" => [
         "refresh" => true
       ]
-    ],
+            ],
     "provinces" => [
       "permission" => "ilocations.provinces.manage",
       "activated" => true,
@@ -31,7 +31,7 @@ return [
       "subHeader" => [
         "refresh" => true
       ]
-    ],
+                ],
     "cities" => [
       "permission" => "ilocations.cities.manage",
       "activated" => true,
@@ -46,7 +46,7 @@ return [
       "subHeader" => [
         "refresh" => true
       ]
-    ],
+        ],
     "cityCreate" => [
       "permission" => null,
       "activated" => true,
@@ -62,7 +62,7 @@ return [
           "ilocations_cms_admin_cities"
         ]
       ]
-    ],
+                ],
     "cityEdit" => [
       "permission" => null,
       "activated" => true,
@@ -79,7 +79,7 @@ return [
           "ilocations_cms_admin_cities"
         ]
       ]
-    ],
+            ],
     "polygons" => [
       "permission" => "ilocations.polygons.manage",
       "activated" => true,
@@ -94,7 +94,7 @@ return [
       "subHeader" => [
         "refresh" => true
       ]
-    ],
+        ],
     "polygonCreate" => [
       "permission" => null,
       "activated" => true,
@@ -110,7 +110,7 @@ return [
           "ilocations_cms_admin_polygons"
         ]
       ]
-    ],
+            ],
     "polygonEdit" => [
       "permission" => null,
       "activated" => true,
@@ -127,7 +127,7 @@ return [
           "ilocations_cms_admin_polygons"
         ]
       ]
-    ],
+        ],
     "geozones" => [
       "permission" => "ilocations.geozones.manage",
       "activated" => true,
@@ -142,7 +142,7 @@ return [
       "subHeader" => [
         "refresh" => true
       ]
-    ],
+                ],
     "geozoneCreate" => [
       "permission" => null,
       "activated" => true,
@@ -158,7 +158,7 @@ return [
           "ilocations_cms_admin_geozones"
         ]
       ]
-    ],
+            ],
     "geozoneEdit" => [
       "permission" => null,
       "activated" => true,
@@ -175,7 +175,7 @@ return [
           "ilocations_cms_admin_geozones"
         ]
       ]
-    ],
+        ],
     "neighborhoods" => [
       "permission" => "ilocations.neighborhoods.manage",
       "activated" => true,
@@ -190,7 +190,7 @@ return [
       "subHeader" => [
         "refresh" => true
       ]
-    ],
+                ],
     "neighborhoodCreate" => [
       "permission" => null,
       "activated" => true,
@@ -206,7 +206,7 @@ return [
           "ilocations_cms_admin_neighborhoods"
         ]
       ]
-    ],
+            ],
     "neighborhoodEdit" => [
       "permission" => null,
       "activated" => true,
@@ -224,7 +224,7 @@ return [
         ]
       ]
     ]
-  ],
-  'panel' => [],
+    ],
+    'panel' => [],
   'main' => []
 ];
