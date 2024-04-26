@@ -64,6 +64,38 @@ class Country extends Model
     return $this->morphToMany(Geozones::class, 'geozonable', 'ilocations__geozonables', 'geozone_id');
   }
 
+  public function getFlagUrlAttribute()
+  {
+
+    //Default
+    $url = url('modules/ilocations/img/countries/flags/default.jpg');
+    //Format to with Imgs
+    $fileName = strtolower($this->iso_2).".svg";
+    
+    //Validaiton Img
+    $imgPath = public_path('/modules/ilocations/img/countries/flags/'.$fileName);
+    if(file_exists($imgPath)) $url = url('/modules/ilocations/img/countries/flags/'.$fileName);
+
+    return $url;
+
+  }
+
+  public function getIcoUrlAttribute()
+  {
+
+    //Default
+    $url = url('modules/ilocations/img/countries/icons/default.jpg');
+    //Format to with Imgs
+    $fileName = strtolower($this->iso_2).".svg";
+    
+    //Validaiton Img
+    $imgPath = public_path('/modules/ilocations/img/countries/icons/'.$fileName);
+    if(file_exists($imgPath)) $url = url('/modules/ilocations/img/countries/icons/'.$fileName);
+
+    return $url;
+
+  }
+
     public function __call($method, $parameters)
     {
         #i: Convert array to dot notation

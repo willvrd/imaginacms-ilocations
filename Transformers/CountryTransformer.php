@@ -24,6 +24,7 @@ class CountryTransformer extends JsonResource
       'countryCode'=>$this->when($this->country_code,$this->country_code),
       'iso3'=>$this->when($this->iso_3,$this->iso_3),
       'callingCode'=>$this->when($this->calling_code,$this->calling_code),
+      'flagUrl'=>$this->when($this->flagUrl,$this->flagUrl),
       'provinces'=> ProvinceTransformer::collection($this->whenLoaded('provinces')),
       'cities'=> CityTransformer::collection($this->whenLoaded('cities')),
       'updatedAt'=>$this->when($this->updated_at,$this->updated_at),
