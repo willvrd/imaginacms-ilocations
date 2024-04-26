@@ -25,3 +25,8 @@ Route Base: `https://yourhost/api/v2/ilocations/`
 * #### Geozone
     `/geozones`
 
+## Publish Assets (Flags)
+```
+    php artisan module:publish Ilocations
+    
+```
