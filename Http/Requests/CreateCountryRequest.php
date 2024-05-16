@@ -14,7 +14,7 @@ class CreateCountryRequest extends BaseFormRequest
           'currency_code' => 'required',
           'currency_sub_unit' => 'required',
           'region_code' => 'required',
-          'sub-region-code' => 'required',
+          'sub_region_code' => 'required',
           'country_code' => 'required',
           'iso_2' => 'required',
           'iso_3' => 'required',
