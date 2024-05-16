@@ -4,6 +4,7 @@ namespace Modules\Ilocations\Repositories\Eloquent;
 
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 use Modules\Ilocations\Repositories\PolygonRepository;
+use Illuminate\Database\Eloquent\Builder;
 
 class EloquentPolygonRepository extends EloquentBaseRepository implements PolygonRepository
 {
@@ -50,6 +51,14 @@ class EloquentPolygonRepository extends EloquentBaseRepository implements Polygo
                 $orderWay = $filter->order->way ?? 'desc'; //Default way
                 $query->orderBy($orderByField, $orderWay); //Add order to query
             }
+
+          //Filter Search
+          if (isset($filter->search) && !empty($filter->search)) {
+            $criterion = $filter->search;
+            $query->whereHas('translations', function (Builder $q) use ($criterion) {
+              $q->where('name', 'like', "%{$criterion}%");
+            });
+          }
         }
 
         /*== FIELDS ==*/
