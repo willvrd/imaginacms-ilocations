@@ -7,6 +7,7 @@ use Modules\Ilocations\Entities\Geozones;
 use Modules\Ilocations\Entities\GeozonesCountries;
 use Modules\Ilocations\Repositories\GeozonesRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
+use Illuminate\Database\Eloquent\Builder;
 
 class EloquentGeozonesRepository extends EloquentBaseRepository implements GeozonesRepository
 {
@@ -77,6 +78,10 @@ class EloquentGeozonesRepository extends EloquentBaseRepository implements Geozo
         $orderByField = $filter->order->field ?? 'created_at';//Default field
         $orderWay = $filter->order->way ?? 'desc';//Default way
         $query->orderBy($orderByField, $orderWay);//Add order to query
+      }
+
+      if (isset($filter->search) && !empty($filter->search)) {
+        $query->where('name', 'like', "%{$filter->search}%");
       }
     }
 
