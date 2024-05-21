@@ -81,17 +81,17 @@ class ProvinceApiController extends BaseApiController
 
     public function create(Request $request)
     {
-        DB::beginTransaction();
+        \DB::beginTransaction();
         try {
             $data = $request->input('attributes') ?? [];
             $this->validateRequestApi(new CreateProvinceRequest($data));
             $province = $this->province->create($data);
             $response = ['data' => new ProvinceTransformer($province)];
             $status = 200;
-            DB::commit();
+            \DB::commit();
         } catch (Exception $exception) {
             Log::Error($exception);
-            DB::rollback();
+            \DB::rollback();
             $status = $this->getStatusError($exception->getCode());
             $response = ['errors' => $exception->getMessage()];
         }
@@ -101,7 +101,7 @@ class ProvinceApiController extends BaseApiController
 
     public function update($criteria, Request $request)
     {
-        DB::beginTransaction();
+        \DB::beginTransaction();
         try {
             $data = $request->input('attributes') ?? [];
             $this->validateRequestApi(new UpdateProvinceRequest($data));
@@ -110,10 +110,10 @@ class ProvinceApiController extends BaseApiController
             $this->province->update($province, $data);
             $response = ['data' => new ProvinceTransformer($province)];
             $status = 200;
-            DB::commit();
+            \DB::commit();
         } catch (Exception $exception) {
             Log::Error($exception);
-            DB::rollback();
+            \DB::rollback();
             $status = $this->getStatusError($exception->getCode());
             $response = ['errors' => $exception->getMessage()];
         }
@@ -123,17 +123,17 @@ class ProvinceApiController extends BaseApiController
 
     public function delete($criteria, Request $request)
     {
-        DB::beginTransaction();
+        \DB::beginTransaction();
         try {
             $params = $this->getParamsRequest($request);
             $province = $this->province->getItem($criteria, $params);
             $this->province->destroy($province);
             $response = ['data' => true];
             $status = 200;
-            DB::commit();
+            \DB::commit();
         } catch (Exception $exception) {
             Log::Error($exception);
-            DB::rollback();
+            \DB::rollback();
             $status = $this->getStatusError($exception->getCode());
             $response = ['errors' => $exception->getMessage()];
         }
