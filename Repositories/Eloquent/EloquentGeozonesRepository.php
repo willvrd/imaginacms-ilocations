@@ -2,182 +2,187 @@
 
 namespace Modules\Ilocations\Repositories\Eloquent;
 
-use Modules\Ilocations\Repositories\GeozonesRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
+use Modules\Ilocations\Entities\Geozones;
+use Modules\Ilocations\Repositories\GeozonesRepository;
+use Illuminate\Database\Eloquent\Builder;
 
 class EloquentGeozonesRepository extends EloquentBaseRepository implements GeozonesRepository
 {
-  public function getAll(){
-    return $this->model->orderBy('name','asc')->get();
-  }
-
-  public function getItemsBy($params = false)
-  {
-    /*== initialize query ==*/
-    $query = $this->model->query();
-
-    /*== RELATIONSHIPS ==*/
-    if (in_array('*', $params->include)) {//If Request all relationships
-      $query->with(['province','country']);
-    } else {//Especific relationships
-      $includeDefault = [];//Default relationships
-      if (isset($params->include))//merge relations with default relationships
-        $includeDefault = array_merge($includeDefault, $params->include);
-      $query->with($includeDefault);//Add Relationships to query
+    public function getAll()
+    {
+        return $this->model->orderBy('name', 'asc')->get();
     }
 
-    /*== FILTERS ==*/
-    if (isset($params->filter)) {
-      $filter = $params->filter;//Short filter
+    public function getItemsBy($params = false)
+    {
+        /*== initialize query ==*/
+        $query = $this->model->query();
 
+        /*== RELATIONSHIPS ==*/
+        if (in_array('*', $params->include)) {//If Request all relationships
+            $query->with(['province', 'country']);
+        } else {//Especific relationships
+            $includeDefault = []; //Default relationships
+            if (isset($params->include)) {//merge relations with default relationships
+                $includeDefault = array_merge($includeDefault, $params->include);
+            }
+            $query->with($includeDefault); //Add Relationships to query
+        }
 
-      if (isset($filter->country))
-        $query->where("country_id", $filter->country);
+        /*== FILTERS ==*/
+        if (isset($params->filter)) {
+            $filter = $params->filter; //Short filter
 
-      if (isset($filter->province))
-        $query->where("province_id", $filter->province);
+            if (isset($filter->country)) {
+                $query->where('country_id', $filter->country);
+            }
 
-      /* Filter for address */
-      if(
-        isset($filter->address) &&
-        isset($filter->address->city) &&
-        isset($filter->address->province) &&
-        isset($filter->address->country)
-      ){
+            if (isset($filter->province)) {
+                $query->where('province_id', $filter->province);
+            }
 
-        $query->whereHas('cities', function ($query) use ($filter) {
-          $query->where('ilocations__cities.id', $filter->address->city);
-        });
+            /* Filter for address */
+            if (
+                isset($filter->address) &&
+                isset($filter->address->city) &&
+                isset($filter->address->province) &&
+                isset($filter->address->country)
+            ) {
+                $query->whereHas('cities', function ($query) use ($filter) {
+                    $query->where('ilocations__cities.id', $filter->address->city);
+                });
 
-        $query->orWhereHas('countries', function ($query) use ($filter) {
-          $query->where('ilocations__countries.id', $filter->address->country);
-        });
+                $query->orWhereHas('countries', function ($query) use ($filter) {
+                    $query->where('ilocations__countries.id', $filter->address->country);
+                });
 
-        $query->orWhereHas('provinces', function ($query) use ($filter) {
-          $query->where('ilocations__provinces.id', $filter->address->province);
-        });
+                $query->orWhereHas('provinces', function ($query) use ($filter) {
+                    $query->where('ilocations__provinces.id', $filter->address->province);
+                });
+            }
 
-      }
+            //Filter by date
+            if (isset($filter->date)) {
+                $date = $filter->date; //Short filter date
+                $date->field = $date->field ?? 'created_at';
+                if (isset($date->from)) {//From a date
+                    $query->whereDate($date->field, '>=', $date->from);
+                }
+                if (isset($date->to)) {//to a date
+                    $query->whereDate($date->field, '<=', $date->to);
+                }
+            }
 
-      //Filter by date
-      if (isset($filter->date)) {
-        $date = $filter->date;//Short filter date
-        $date->field = $date->field ?? 'created_at';
-        if (isset($date->from))//From a date
-          $query->whereDate($date->field, '>=', $date->from);
-        if (isset($date->to))//to a date
-          $query->whereDate($date->field, '<=', $date->to);
-      }
+            //Order by
+            if (isset($filter->order)) {
+                $orderByField = $filter->order->field ?? 'created_at'; //Default field
+                $orderWay = $filter->order->way ?? 'desc'; //Default way
+                $query->orderBy($orderByField, $orderWay); //Add order to query
+            }
 
-      //Order by
-      if (isset($filter->order)) {
-        $orderByField = $filter->order->field ?? 'created_at';//Default field
-        $orderWay = $filter->order->way ?? 'desc';//Default way
-        $query->orderBy($orderByField, $orderWay);//Add order to query
-      }
+            if (isset($filter->search) && !empty($filter->search)) {
+              $query->where('name', 'like', "%{$filter->search}%");
+            }
+        }
+
+        /*== FIELDS ==*/
+        if (isset($params->fields) && count($params->fields)) {
+            $query->select($params->fields);
+        }
+
+        /*== REQUEST ==*/
+        if (isset($params->page) && $params->page) {
+            return $query->paginate($params->take);
+        } else {
+            $params->take ? $query->take($params->take) : false; //Take
+
+            return $query->get();
+        }
     }
 
-    /*== FIELDS ==*/
-    if (isset($params->fields) && count($params->fields))
-      $query->select($params->fields);
+    public function getItem($criteria, $params = false)
+    {
+        //Initialize query
+        $query = $this->model->query();
 
-    /*== REQUEST ==*/
-    if (isset($params->page) && $params->page) {
-      return $query->paginate($params->take);
-    } else {
-      $params->take ? $query->take($params->take) : false;//Take
-      return $query->get();
-    }
-  }
+        /*== RELATIONSHIPS ==*/
+        if (in_array('*', $params->include)) {//If Request all relationships
+            $query->with(['province', 'country']);
+        } else {//Especific relationships
+            $includeDefault = []; //Default relationships
+            if (isset($params->include)) {//merge relations with default relationships
+                $includeDefault = array_merge($includeDefault, $params->include);
+            }
+            $query->with($includeDefault); //Add Relationships to query
+        }
 
-  public function getItem($criteria, $params = false)
-  {
-    //Initialize query
-    $query = $this->model->query();
+        /*== FILTER ==*/
+        if (isset($params->filter)) {
+            $filter = $params->filter;
 
-    /*== RELATIONSHIPS ==*/
-    if (in_array('*', $params->include)) {//If Request all relationships
-      $query->with(['province','country']);
-    } else {//Especific relationships
-      $includeDefault = [];//Default relationships
-      if (isset($params->include))//merge relations with default relationships
-        $includeDefault = array_merge($includeDefault, $params->include);
-      $query->with($includeDefault);//Add Relationships to query
-    }
+            if (isset($filter->field)) {//Filter by specific field
+                $field = $filter->field;
+            }
+        }
 
-    /*== FILTER ==*/
-    if (isset($params->filter)) {
-      $filter = $params->filter;
+        /*== FIELDS ==*/
+        if (isset($params->fields) && count($params->fields)) {
+            $query->select($params->fields);
+        }
 
-      if (isset($filter->field))//Filter by specific field
-        $field = $filter->field;
+        /*== REQUEST ==*/
+        return $query->where($field ?? 'id', $criteria)->first();
     }
 
-    /*== FIELDS ==*/
-    if (isset($params->fields) && count($params->fields))
-      $query->select($params->fields);
+    public function create($data)
+    {
+        /**
+         * @var Geozones $model
+         */
+        $model = $this->model->create($data);
 
-    /*== REQUEST ==*/
-    return $query->where($field ?? 'id', $criteria)->first();
-  }
+        if ($model) {
+            if (isset($data['zones_to_geozone'])) {
+                $model->zonesToGeozone()->createMany($data['zones_to_geozone']);
+            }
+        }
 
-  public function create($data)
-  {
-    $geozone = $this->model->create($data);
-
-    if ($geozone) {
-
-      if (isset($data['countries'])){
-        $geozone->countries()->sync(array_get($data, 'countries', []));
-      }
-
-      if (isset($data['cities'])){
-        $geozone->cities()->sync(array_get($data, 'cities', []));
-      }
-
-      if (isset($data['provinces'])){
-        $geozone->provinces()->sync(array_get($data, 'provinces', []));
-      }
-
-      if (isset($data['polygons'])){
-        $geozone->polygons()->sync(array_get($data, 'polygons', []));
-      }
-
-      if (isset($data['neighborhoods'])){
-        $geozone->neighborhoods()->sync(array_get($data, 'neighborhoods', []));
-      }
+        return $model;
     }
 
-    return $geozone;
-  }
+    public function update($criteria, $data, $params = false)
+    {
+        /*== initialize query ==*/
+        $query = $this->model->query();
 
-  public function update($model, $data)
-  {
-    $geozone = $model->update($data);
+        /*== FILTER ==*/
+        if (isset($params->filter)) {
+            $filter = $params->filter;
 
-    if ($geozone) {
+            //Update by field
+            if (isset($filter->field)) {
+                $field = $filter->field;
+            }
+        }
 
-      if (isset($data['countries'])){
-        $geozone->countries()->sync(array_get($data, 'countries', []));
-      }
+        /*== REQUEST ==*/
+        /**
+         * @var Geozones $model
+         */
+        $model = $query->where($field ?? 'id', $criteria)->first();
 
-      if (isset($data['cities'])){
-        $geozone->cities()->sync(array_get($data, 'cities', []));
-      }
+        $model->update((array) $data);
 
-      if (isset($data['provinces'])){
-        $geozone->provinces()->sync(array_get($data, 'provinces', []));
-      }
+        if ($model) {
+            if (isset($data['zones_to_geozone'])) {
+                $model->zonesToGeozone()->delete();
+                $model->zonesToGeozone()->createMany($data['zones_to_geozone']);
+            }
 
-      if (isset($data['polygons'])){
-        $geozone->polygons()->sync(array_get($data, 'polygons', []));
-      }
+            return $model;
+        }
 
-      if (isset($data['neighborhoods'])){
-        $geozone->neighborhoods()->sync(array_get($data, 'neighborhoods', []));
-      }
+        return false;
     }
-
-    return $geozone;
-  }
 }

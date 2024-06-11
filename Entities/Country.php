@@ -2,7 +2,7 @@
 
 namespace Modules\Ilocations\Entities;
 
-use Dimsav\Translatable\Translatable;
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
@@ -33,14 +33,67 @@ class Country extends Model
     return $this->hasMany(Province::class);
   }
 
+  public function children()
+  {
+    return $this->hasMany(Province::class)->with("children");
+  }
+
   public function cities()
   {
     return $this->hasMany(City::class);
+  }
+  
+  public function getNameAttribute(){
+    
+    $currentTranslations = $this->getTranslation(locale());
+    
+    if (empty($currentTranslations) || empty($currentTranslations->toArray()["name"])) {
+      
+      $model = $this->getTranslation(\LaravelLocalization::getDefaultLocale());
+  
+      if(empty($model)) return "";
+      return $model->toArray()["name"] ?? "";
+    }
+    
+    return $currentTranslations->toArray()["name"];
+    
   }
 
   public function geozones()
   {
     return $this->morphToMany(Geozones::class, 'geozonable', 'ilocations__geozonables', 'geozone_id');
+  }
+
+  public function getFlagUrlAttribute()
+  {
+
+    //Default
+    $url = url('modules/ilocations/img/countries/flags/default.jpg');
+    //Format to with Imgs
+    $fileName = strtolower($this->iso_2).".svg";
+    
+    //Validaiton Img
+    $imgPath = public_path('/modules/ilocations/img/countries/flags/'.$fileName);
+    if(file_exists($imgPath)) $url = url('/modules/ilocations/img/countries/flags/'.$fileName);
+
+    return $url;
+
+  }
+
+  public function getIcoUrlAttribute()
+  {
+
+    //Default
+    $url = url('modules/ilocations/img/countries/icons/default.jpg');
+    //Format to with Imgs
+    $fileName = strtolower($this->iso_2).".svg";
+    
+    //Validaiton Img
+    $imgPath = public_path('/modules/ilocations/img/countries/icons/'.$fileName);
+    if(file_exists($imgPath)) $url = url('/modules/ilocations/img/countries/icons/'.$fileName);
+
+    return $url;
+
   }
 
     public function __call($method, $parameters)

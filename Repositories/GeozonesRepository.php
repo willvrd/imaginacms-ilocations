@@ -6,7 +6,9 @@ use Modules\Core\Repositories\BaseRepository;
 
 interface GeozonesRepository extends BaseRepository
 {
-  public function getAll();
-  public function getItemsBy($params);
-  public function getItem($criteria, $params);
+    public function getAll();
+
+    public function getItemsBy($params);
+
+    public function getItem($criteria, $params = false);
 }

@@ -2,10 +2,10 @@
 
 namespace Modules\Ilocations\Transformers;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class CountryTransformer extends Resource
+class CountryTransformer extends JsonResource
 {
   public function toArray($request)
   {
@@ -24,6 +24,8 @@ class CountryTransformer extends Resource
       'countryCode'=>$this->when($this->country_code,$this->country_code),
       'iso3'=>$this->when($this->iso_3,$this->iso_3),
       'callingCode'=>$this->when($this->calling_code,$this->calling_code),
+      'flagUrl'=>$this->when($this->flagUrl,$this->flagUrl),
+      'icoUrl'=>$this->when($this->icoUrl,$this->icoUrl),
       'provinces'=> ProvinceTransformer::collection($this->whenLoaded('provinces')),
       'cities'=> CityTransformer::collection($this->whenLoaded('cities')),
       'updatedAt'=>$this->when($this->updated_at,$this->updated_at),

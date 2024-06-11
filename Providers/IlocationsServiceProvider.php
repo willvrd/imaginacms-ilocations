@@ -2,15 +2,17 @@
 
 namespace Modules\Ilocations\Providers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
-use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Core\Events\BuildingSidebar;
 use Modules\Core\Events\LoadingBackendTranslations;
+use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Ilocations\Events\Handlers\RegisterIlocationsSidebar;
 
 class IlocationsServiceProvider extends ServiceProvider
 {
     use CanPublishConfiguration;
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -20,41 +22,38 @@ class IlocationsServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->registerBindings();
         $this->app['events']->listen(BuildingSidebar::class, RegisterIlocationsSidebar::class);
 
         $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
-            $event->load('countries', array_dot(trans('ilocations::countries')));
-            $event->load('provinces', array_dot(trans('ilocations::provinces')));
-            $event->load('cities', array_dot(trans('ilocations::cities')));
-            $event->load('polygons', array_dot(trans('ilocations::polygons')));
+            $event->load('countries', Arr::dot(trans('ilocations::countries')));
+            $event->load('provinces', Arr::dot(trans('ilocations::provinces')));
+            $event->load('cities', Arr::dot(trans('ilocations::cities')));
+            $event->load('polygons', Arr::dot(trans('ilocations::polygons')));
             // append translations
-
-
-
         });
     }
 
-    public function boot()
+    public function boot(): void
     {
-        $this->publishConfig('ilocations', 'permissions');
         $this->publishConfig('ilocations', 'config');
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'permissions'), 'asgard.ilocations.permissions');
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'settings'), 'asgard.ilocations.settings');
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'settings-fields'), 'asgard.ilocations.settings-fields');
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'cmsPages'), 'asgard.ilocations.cmsPages');
+        $this->mergeConfigFrom($this->getModuleConfigFilePath('ilocations', 'cmsSidebar'), 'asgard.ilocations.cmsSidebar');
+        //$this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
      * Get the services provided by the provider.
-     *
-     * @return array
      */
-    public function provides()
+    public function provides(): array
     {
-        return array();
+        return [];
     }
 
     private function registerBindings()
@@ -120,23 +119,30 @@ class IlocationsServiceProvider extends ServiceProvider
                 return new \Modules\Ilocations\Repositories\Cache\CachePolygonDecorator($repository);
             }
         );
-      $this->app->bind(
-        'Modules\Ilocations\Repositories\NeighborhoodRepository',
-        function () {
-          $repository = new \Modules\Ilocations\Repositories\Eloquent\EloquentNeighborhoodRepository(new \Modules\Ilocations\Entities\Neighborhood());
+        $this->app->bind(
+            'Modules\Ilocations\Repositories\NeighborhoodRepository',
+            function () {
+                $repository = new \Modules\Ilocations\Repositories\Eloquent\EloquentNeighborhoodRepository(new \Modules\Ilocations\Entities\Neighborhood());
 
-          if (! config('app.cache')) {
-            return $repository;
-          }
+                if (! config('app.cache')) {
+                    return $repository;
+                }
 
-          return new \Modules\Ilocations\Repositories\Cache\CacheNeighborhoodDecorator($repository);
-        }
-      );
-// add bindings
+                return new \Modules\Ilocations\Repositories\Cache\CacheNeighborhoodDecorator($repository);
+            }
+        );
+        $this->app->bind(
+            'Modules\Ilocations\Repositories\LocalityRepository',
+            function () {
+                $repository = new \Modules\Ilocations\Repositories\Eloquent\EloquentLocalityRepository(new \Modules\Ilocations\Entities\Locality());
 
+                if (! config('app.cache')) {
+                    return $repository;
+                }
 
-
-
-
+                return new \Modules\Ilocations\Repositories\Cache\CacheLocalityDecorator($repository);
+            }
+        );
+        // add bindings
     }
 }
