@@ -13,6 +13,8 @@ class GeozonesTransformer extends CrudResource
   */
   public function modelAttributes($request)
   {
-    return [];
+    return [
+      'zonesToGeozone' => ZoneTransformer::collection($this->whenLoaded('zonesToGeozone'))
+    ];
   }
 }
