@@ -11,7 +11,7 @@ class EloquentProvinceRepository extends EloquentCrudRepository implements Provi
    * Filter names to replace
    * @var array
    */
-  protected $replaceFilters = [];
+  protected $replaceFilters = ['countryId'];
 
   /**
    * Relation names to replace
@@ -46,6 +46,8 @@ class EloquentProvinceRepository extends EloquentCrudRepository implements Provi
      * if (isset($filter->status)) $query->where('status', $filter->status);
      *
      */
+    if (isset($filter->country))
+      $query->where("country_id", $filter->country);
 
     if (isset($filter->countryCode)) {
       $code = $filter->countryCode;
