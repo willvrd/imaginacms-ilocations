@@ -11,7 +11,7 @@ class EloquentCityRepository extends EloquentCrudRepository implements CityRepos
    * Filter names to replace
    * @var array
    */
-  protected $replaceFilters = [];
+  protected $replaceFilters = ['provinceId'];
 
   /**
    * Relation names to replace
@@ -46,6 +46,8 @@ class EloquentCityRepository extends EloquentCrudRepository implements CityRepos
      * if (isset($filter->status)) $query->where('status', $filter->status);
      *
      */
+    if (isset($filter->province))
+      $query->where("province_id", $filter->province);
 
      //add filter by search
     if (isset($filter->search)) {
