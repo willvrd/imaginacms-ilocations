@@ -49,6 +49,10 @@ class EloquentProvinceRepository extends EloquentCrudRepository implements Provi
     if (isset($filter->country))
       $query->where("country_id", $filter->country);
 
+    if (isset($filter->iso2)) {
+      $query->whereIn("iso_2", (array)$filter->iso2);
+    }
+
     if (isset($filter->countryCode)) {
       $code = $filter->countryCode;
       $query->whereHas("country", function ($q) use ($code) {
